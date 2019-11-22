@@ -1,6 +1,7 @@
 # INFO6150 Final Project
 
 
+
 ## Team: Script Magnets
 * Jiachen Yu (yu.jiac@husky.neu.edu)
 * Viraj Rajopadhye (rajopadhye.v@husky.neu.edu)
@@ -20,3 +21,19 @@
 * Email confirmation of booking with PDF
 * Chat between Driver and Passenger
 * Rating (optional)
+
+### Angular Client File Structure
+    ├── app                             
+        ├── home                        # Components related to Home page go in here
+        ├── nav-bar                     # Components related to navbar go in here       
+        ├── rides                       # Components related to rides go in here
+            ├── search                       # Search page
+            └── Post                         # Post page
+        ├── users                       # Compoennts related to users go in here
+            ├── Login                        # Login page
+            └── Personal page                # (Not created yet)Personal home page
+        ├── services                    # All the files related to service go in there
+            ├── ride.service.ts              # Ride data service related functions are defined here, like search or add a ride
+            └── user.service.ts              # User data service related functions are defined here, like add or get a user
+        └── app-routing.modules.ts      # Routing table
+        └── app.component.html          # Only add compoenents that will appear on every page to this file, like navbar
