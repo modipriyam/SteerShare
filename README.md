@@ -22,7 +22,26 @@
 * Chat between Driver and Passenger
 * Rating (optional)
 
+### To Run the project
+This project has two major parts, which are Angular client and Node server. It needs to be run SEPARATELY on different ports!
+#### Client Angular
+Change the working directory to the client folder
+`cd Client-Angular`
+Install all the dependencies
+`npm install`
+Start the angular server
+`ng serve`
+
+#### Server Node
+Change the working directory to the server folder
+`cd Server-Node`
+Install all the dependencies
+`npm install`
+Start the angular server
+`node server.js`
+
 ### Angular Client File Structure
+    ./Client-Angular
     ├── app                             
         ├── home                        # Components related to Home page go in here
         ├── nav-bar                     # Components related to navbar go in here       
@@ -37,3 +56,22 @@
             └── user.service.ts              # User data service related functions are defined here, like add or get a user
         └── app-routing.modules.ts      # Routing table
         └── app.component.html          # Only add compoenents that will appear on every page to this file, like navbar
+    └── ...
+
+### Node Client File Structure
+    ./Server-Node
+    ├── app                             
+        ├── controllers                        
+            ├── userController.js       # Handles response and request related to users
+            └── postController.js       # Handles response and request related to posts
+        ├── models                    
+            ├── post.js                 # Data model - Post
+            └── user.js                 # Data model - User
+        ├── routes                       
+            └── routes.js               # Direct requests to controllers based on the url
+        ├── services                      
+            ├── postServices            # Perform actual database actions related to Post
+            └── userServices            # Perform actual database actions related to User
+        ├── app.js                      # Import the data models and routes
+    ├── server.js                       # Definition of the app and the settings
+    └── ...
