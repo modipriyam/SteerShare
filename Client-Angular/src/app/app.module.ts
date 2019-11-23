@@ -8,6 +8,7 @@ import { PostComponent } from './rides/post/post.component';
 import { SearchComponent } from './rides/search/search.component';
 import { LoginComponent } from './users/login/login.component';
 import { HomeComponent } from './home/home.component';
+import { ResultComponent } from './result/result.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HomeComponent } from './home/home.component';
     PostComponent,
     SearchComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    ResultComponent
   ],
   imports: [
     BrowserModule,

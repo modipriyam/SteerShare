@@ -1,3 +1,4 @@
+import { ResultComponent } from './result/result.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -6,6 +7,7 @@ import { LoginComponent } from "./users/login/login.component";
 import { PostComponent } from "./rides/post/post.component";
 import { SearchComponent } from "./rides/search/search.component";
 import { HomeComponent } from './home/home.component';
+
 
 
 const routes: Routes = [
@@ -17,13 +19,17 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
-  { 
+  {
     path: 'post',
-    component: PostComponent 
+    component: PostComponent
   },
   {
     path: 'search',
     component: SearchComponent
+  },
+  {
+    path: 'result',
+    component: ResultComponent
   }
 ];
 
