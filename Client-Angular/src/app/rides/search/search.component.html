@@ -1,11 +1,14 @@
 <p>search works!</p>
 <form>
-<div class=search *ngFor="let location of locations">
 
+
+<div class=search>
   <div class="form-group">
       <label for="from">From</label>
-      <input id="from" type="text" class="form-control">
-  </div>
+
+      <input id="from" type="text"  class="form-control m-input">
+    </div>
+
 
   <div class="form-group">
       <label for="from">To</label>
@@ -13,6 +16,6 @@
 
   </div>
 
-  <button class="btn btn-primary" [routerLink]="['/result']" (click)="validate($event, location)"routerLinkActive="router-link-active" >Search</button>
+  <button class="btn btn-primary" [routerLink]="['/result']" (click)="validate($event)"routerLinkActive="router-link-active" >Search</button>
 </div>
 </form>

@@ -20,9 +20,28 @@ locations: Array<Location>;
   }
 
 
-validate(event: Event, location: Location){
-  let val= location.name;
+validate(event: Event){
+ let val =  (<HTMLInputElement> document.getElementById("from")).value;
+//  let val1 = this.locations.
+
+//  let json = JSON.parse(array);
+
+ console.log(this.locations.length);
+
+ // tslint:disable-next-line: prefer-for-of
+ for (let i = 0; i < this.locations.length; i++) {
+  let name = this.locations[i].name;
+
   console.log(val);
+  console.log(name);
+  if (val === name){
+    window.alert('Location found');
+    break;
+  } else {
+    window.alert('Location not found');
+    break;
+  }
+}
 
 }
 
