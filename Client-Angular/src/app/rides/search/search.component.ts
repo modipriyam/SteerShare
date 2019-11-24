@@ -10,6 +10,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
+
+
+  show: boolean = true;
 locations: Array<Location>;
   constructor(private rideService: RideService) { }
 
@@ -22,9 +25,7 @@ locations: Array<Location>;
 
 validate(event: Event){
  let val =  (<HTMLInputElement> document.getElementById("from")).value;
-//  let val1 = this.locations.
 
-//  let json = JSON.parse(array);
 
  console.log(this.locations.length);
 
@@ -37,6 +38,7 @@ validate(event: Event){
   if (val === name){
     window.alert('Location found');
     break;
+
   } else {
     window.alert('Location not found');
     break;
