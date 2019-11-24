@@ -9,6 +9,7 @@ import { SearchComponent } from './rides/search/search.component';
 import { LoginComponent } from './users/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ResultComponent } from './result/result.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ResultComponent } from './result/result.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

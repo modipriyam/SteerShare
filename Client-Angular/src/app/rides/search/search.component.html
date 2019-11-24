@@ -1,5 +1,6 @@
 <p>search works!</p>
 <form>
+<div class=search *ngFor="let location of locations">
 
   <div class="form-group">
       <label for="from">From</label>
@@ -12,6 +13,6 @@
 
   </div>
 
-  <button class="btn btn-primary" [routerLink]="['/result']" routerLinkActive="router-link-active" >Search</button>
-
+  <button class="btn btn-primary" [routerLink]="['/result']" (click)="validate($event, location)"routerLinkActive="router-link-active" >Search</button>
+</div>
 </form>
