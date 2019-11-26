@@ -1,7 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const User = mongoose.model('Post');
+const Post = mongoose.model('Post');
 
 exports.save = function(params){
     const newUser = new Post(params);
@@ -9,10 +9,32 @@ exports.save = function(params){
     return promise;
 }
 
-exports.search = function(params){
-    const promise = Post.find(params).exec();
+exports.searchByLocationAndTime = function(params){
+    const promise = Post.find({
+        $or : [
+        {
+        from: {$eq: params.from},
+        to: { $eq: params.to},
+        travel_date: { $gte: params.travel_date},
+        travel_time: { $gte: params.travel_time}},
+        {
+        from: {$eq: params.from},
+        to: { $eq: params.to},
+        travel_date: { $gt: params.travel_date}}
+        ]
+    }).exec();
     return promise;
 };
+
+exports.searchByLocation = function(params){
+    const promise = Post.find({
+        from: {$eq: params.from},
+        to: { $eq: params.to},
+        travel_date: { $gte: params.travel_date}
+    }).exec();
+    return promise;
+};
+
 
 exports.get = function(id){
     const promise = Post.findById(id).exec();
