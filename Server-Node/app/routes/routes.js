@@ -9,8 +9,6 @@ module.exports = function(app){
         .put(userController.put) //Update one user
         .delete(userController.delete); //Delete one user
 
-    app.route('/post/:id')
-        .get(postController.get) //Fetch one post
-        .put(postController.put) //Update one post
-        .delete(postController.delete); //Delete one post
+    app.route('/posts')
+        .get(postController.search); //Fetch one post
 };
