@@ -14,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
 export class SearchComponent implements OnInit {
 
 
-show: boolean = true;
+
 locations: Array<Location>;
 currentDate: string;
 hours: string;
@@ -24,32 +24,34 @@ hours: string;
   ngOnInit() {
     this.rideService.list().subscribe(locations => {
       this.locations = locations;
-      this.currentDate = new Date().toISOString().split("T")[0];
-      var date= new Date();
+      this.currentDate = new Date().toISOString().split('T')[0];
+      var date = new Date();
       this.hours = date.getHours().toLocaleString();
-      const element = (<HTMLInputElement>document.getElementById('date'));
-    element.valueAsNumber = Date.now()-(new Date()).getTimezoneOffset()*60000;
+      const element = (document.getElementById('date') as HTMLInputElement);
+      element.valueAsNumber = Date.now() - (new Date()).getTimezoneOffset() * 60000;
 
     });
   }
 
 
-validate(event: Event){
- let from =  (<HTMLInputElement> document.getElementById("from")).value;
- let to =  (<HTMLInputElement> document.getElementById("to")).value;
-let date= (<HTMLInputElement> document.getElementById("date")).value;
-let time=(<HTMLInputElement> document.getElementById("time")).value;
-console.log(date);
-console.log(time);
+  validate(event: Event) {
+    let from = (document.getElementById('from') as HTMLInputElement).value;
+    let to = (document.getElementById('to') as HTMLInputElement).value;
+    let date = (document.getElementById('date') as HTMLInputElement).value;
+    let time = (document.getElementById('time') as HTMLInputElement).value;
+    console.log(date);
+    console.log(time);
 
 
-this.rideService.searchByLocationAndTime(from,to,date,time).subscribe(posts=>{
-  console.log(posts);
-  this.router.navigate(['/result']);
+    this.rideService.searchByLocationAndTime(from, to, date, time).subscribe(posts => {
+      console.log(posts);
+      if (posts.length !== 0) {
+        this.router.navigate(['/result']);
+      }
 
 
 
-})
+    })
 
 
 
