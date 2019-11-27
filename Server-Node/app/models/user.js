@@ -7,6 +7,22 @@ let User = new Schema({
     username: {
         type: String,
         required: "username is required"
+    },
+    password_hash: {
+        type: String, 
+        required: "Password hash is required"
+    },
+    firstName: {
+        type: String, 
+        required: "First name is required"
+    },
+    lastName: {
+        type: String, 
+        required: "Last name is required"
+    },
+    createDate: {
+        type: Date, 
+        default: Date.now
     }
 }, {
     versionKey: false
