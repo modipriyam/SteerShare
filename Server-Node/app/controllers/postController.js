@@ -36,16 +36,22 @@ exports.search = function(req, res){
         res.status(200);
         res.json(posts);
     }
-
-    if(req.query.travel_time){
-        postService.searchByLocationAndTime(req.query)
-            .then(resolve)
-            .catch(renderErrorResponse(res));
+    if(req.query.exact){
+        postService.searchByExactDateTime(req.query)
+                .then(resolve)
+                .catch(renderErrorResponse(res));
     }
     else{
-        postService.searchByLocation(req.query)
-            .then(resolve)
-            .catch(renderErrorResponse(res));
+        if(req.query.travel_time){
+            postService.searchByLocationAndTime(req.query)
+                .then(resolve)
+                .catch(renderErrorResponse(res));
+        }
+        else{
+            postService.searchByLocation(req.query)
+                .then(resolve)
+                .catch(renderErrorResponse(res));
+        }
     }
 };
 

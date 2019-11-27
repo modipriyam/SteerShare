@@ -9,6 +9,20 @@ exports.save = function(params){
     return promise;
 }
 
+exports.searchByExactDateTime = function(params){
+    console.log("Wea re here@");
+    console.log(params.from);
+    console.log(params.to);
+    console.log(params.travel_date);
+    const promise = Post.find({
+        from: {$eq: params.from},
+        to: { $eq: params.to},
+        travel_date: { $eq: params.travel_date}
+    }).exec();
+    return promise;
+};
+
+
 exports.searchByLocationAndTime = function(params){
     const promise = Post.find({
         $or : [

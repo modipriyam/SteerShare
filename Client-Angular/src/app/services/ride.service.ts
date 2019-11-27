@@ -26,7 +26,18 @@ export class RideService {
       .set('travel_date', travel_date)
       .set('travel_time', travel_time);
     const posts$ = this.http.get<Array<Post>>("http://localhost:3000/posts", {params});
-    return posts$; 
+    return posts$;
+  }
+
+  public searchByExactDateTime(from: string, to: string, travel_date: string, travel_time: string): Observable<Array<Post>> {
+    const params = new HttpParams()
+      .set('from', from)
+      .set('to', to)
+      .set('travel_date', travel_date)
+      .set('travel_time', travel_time)
+      .set('exact', 'true');
+    const posts$ = this.http.get<Array<Post>>("http://localhost:3000/posts", {params});
+    return posts$;
   }
 
   public searchByLocation(from: string, to: string, travel_date: string): Observable<Array<Post>> {
@@ -35,6 +46,6 @@ export class RideService {
       .set('to', to)
       .set('travel_date', travel_date);
     const posts$ = this.http.get<Array<Post>>("http://localhost:3000/posts", {params});
-    return posts$; 
+    return posts$;
   }
 }

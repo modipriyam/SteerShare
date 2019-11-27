@@ -27,6 +27,8 @@ hours: string;
       this.currentDate = new Date().toISOString().split("T")[0];
       var date= new Date();
       this.hours = date.getHours().toLocaleString();
+      const element = (<HTMLInputElement>document.getElementById('date'));
+    element.valueAsNumber = Date.now()-(new Date()).getTimezoneOffset()*60000;
 
     });
   }
@@ -35,44 +37,27 @@ hours: string;
 validate(event: Event){
  let from =  (<HTMLInputElement> document.getElementById("from")).value;
  let to =  (<HTMLInputElement> document.getElementById("to")).value;
+let date= (<HTMLInputElement> document.getElementById("date")).value;
+let time=(<HTMLInputElement> document.getElementById("time")).value;
+console.log(date);
+console.log(time);
 
 
- //console.log(this.locations.length);
- console.log(this.hours);
-
- // tslint:disable-next-line: prefer-for-of
- for (let i = 0; i < this.locations.length; i++) {
-  let name = this.locations[i].name;
-
-  console.log(from);
-  console.log(name);
-
-  if(from === name && to === name)
-    {
-      window.alert('Location found');
-      this.router.navigate(['/result']);
-      break;
-    }
+this.rideService.searchByLocationAndTime(from,to,date,time).subscribe(posts=>{
+  console.log(posts);
+  this.router.navigate(['/result']);
 
 
-  else
-  {
-    if (from !== name)
-    {
-        continue;
 
-    }
+})
 
-  else if(to !== name)
-    {
-      continue;
-    }
 
-  }
-}
 
 
 }
+
+
+
 
 }
 
