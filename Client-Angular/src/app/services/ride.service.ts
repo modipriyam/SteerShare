@@ -1,7 +1,10 @@
 import { Location } from './../rides/locations.model';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
+//Import data models
+import { Post } from '../models/post.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +17,35 @@ export class RideService {
   public list(): Observable<Array<Location>> {
     const locations$ = this.http.get<Location[]>('assets/locations.json');
     return locations$;
+  }
+
+  public searchByLocationAndTime(from: string, to: string, travel_date: string, travel_time: string): Observable<Array<Post>> {
+    const params = new HttpParams()
+      .set('from', from)
+      .set('to', to)
+      .set('travel_date', travel_date)
+      .set('travel_time', travel_time);
+    const posts$ = this.http.get<Array<Post>>("http://localhost:3000/posts", {params});
+    return posts$;
+  }
+
+  public searchByExactDateTime(from: string, to: string, travel_date: string, travel_time: string): Observable<Array<Post>> {
+    const params = new HttpParams()
+      .set('from', from)
+      .set('to', to)
+      .set('travel_date', travel_date)
+      .set('travel_time', travel_time)
+      .set('exact', 'true');
+    const posts$ = this.http.get<Array<Post>>("http://localhost:3000/posts", {params});
+    return posts$;
+  }
+
+  public searchByLocation(from: string, to: string, travel_date: string): Observable<Array<Post>> {
+    const params = new HttpParams()
+      .set('from', from)
+      .set('to', to)
+      .set('travel_date', travel_date);
+    const posts$ = this.http.get<Array<Post>>("http://localhost:3000/posts", {params});
+    return posts$;
   }
 }
