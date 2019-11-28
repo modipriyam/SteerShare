@@ -17,10 +17,9 @@ exports.post = function(req, res){
 };
 
 exports.authenticate = function(req, res, next){
-    console.log("Activated!");
-    console.log(req.body);
-    userService.authenticate(req.body);
-    res.send("I got ", req.body.username);
+    userService.authenticate(req.body)
+        .then(user => user ? res.json(user) : res.status(400).json({ message: 'Username or password is incorrect' }))
+        .catch(err => next(err));
 }
 
 exports.register = function(req, res, next){

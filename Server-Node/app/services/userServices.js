@@ -1,5 +1,6 @@
 'use strict';
 
+const config = require('../../app/config.json');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const jwt = require('jsonwebtoken');
@@ -38,8 +39,20 @@ exports.delete = function(id){
 }
 
 async function authenticate({username, password}){
-    console.log(username),
+    console.log(config.secret);
+    console.log(username);
     console.log(password);
+    const user = await User.findOne({username});
+    if(user && bcrypt.compareSync(password, user.password_hash)){
+        const { password_hash, ...userWithoutHash } = user.toObject();
+        const token = jwt.sign({ sub: user._id}, config.secret);
+        return {
+            ...userWithoutHash, 
+            token
+        };
+    }
+    else
+        console.log("Something is wrong");
 }
 
 async function register(params){
