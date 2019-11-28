@@ -1,7 +1,9 @@
 import { Router } from '@angular/router';
 import { RideService } from './../../services/ride.service';
 import { Location } from './../locations.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Post } from 'src/app/models/post.model';
+
 
 
 
@@ -18,6 +20,7 @@ export class SearchComponent implements OnInit {
 locations: Array<Location>;
 currentDate: string;
 hours: string;
+
 
   constructor(private rideService: RideService, private router: Router) { }
 
@@ -44,17 +47,15 @@ hours: string;
 
 
     this.rideService.searchByLocationAndTime(from, to, date, time).subscribe(posts => {
-      console.log(posts);
+      //console.log(posts);
+
       if (posts.length !== 0) {
-        this.router.navigate(['/result']);
+        this.router.navigate(['/result'], {queryParams:  {from: from, to: to, date: date, time: time}});
       }
 
 
 
     })
-
-
-
 
 }
 
