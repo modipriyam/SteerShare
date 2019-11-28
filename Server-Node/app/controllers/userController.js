@@ -16,6 +16,19 @@ exports.post = function(req, res){
         .catch(renderErrorResponse(res));
 };
 
+exports.authenticate = function(req, res, next){
+    console.log("Activated!");
+    console.log(req.body);
+    userService.authenticate(req.body);
+    res.send("I got ", req.body.username);
+}
+
+exports.register = function(req, res, next){
+    userService.register(req.body)
+        .then(()=> res.json({}))
+        .catch(err => next(err));
+}
+
 //Return an updated user in JSON based on the update parameters
 exports.put = function(req, res){
     const user = Object.assign({}, req.body);
