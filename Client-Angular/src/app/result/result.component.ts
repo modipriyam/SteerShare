@@ -22,16 +22,18 @@ export class ResultComponent implements OnInit {
   ngOnInit() {
 
   this.route.queryParams.subscribe(params => {
-    //console.log(params);
+    /**Receiving parameters from query*/
     let from = params['from'];
     let to = params['to'];
     let date = params['date'];
     let time = params['date'];
 
-     this.rideService.searchByLocationAndTime(from, to, date, time).subscribe(posts => {
+    /**Assigning it to Search Function */
+
+    this.rideService.searchByLocationAndTime(from, to, date, time).subscribe(posts => {
        console.log(posts);
-       this.posts=posts;
-    })
+       this.posts = posts;
+    });
 
 
 
