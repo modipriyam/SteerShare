@@ -2,11 +2,6 @@ import { Router } from '@angular/router';
 import { RideService } from './../../services/ride.service';
 import { Location } from './../locations.model';
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { Post } from 'src/app/models/post.model';
-
-
-
-
 
 @Component({
   selector: 'app-search',
@@ -14,28 +9,23 @@ import { Post } from 'src/app/models/post.model';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
+  locations: Array<Location>;
+  currentDate: string;
+  hours: string;
 
-
-
-locations: Array<Location>;
-currentDate: string;
-hours: string;
-
-
-  constructor(private rideService: RideService, private router: Router) { }
+  constructor(private rideService: RideService, private router: Router) {}
 
   ngOnInit() {
     this.rideService.list().subscribe(locations => {
       this.locations = locations;
       this.currentDate = new Date().toISOString().split('T')[0];
-      var date = new Date();
+      let date = new Date();
       this.hours = date.getHours().toLocaleString();
-      const element = (document.getElementById('date') as HTMLInputElement);
-      element.valueAsNumber = Date.now() - (new Date()).getTimezoneOffset() * 60000;
-
+      const element = document.getElementById('date') as HTMLInputElement;
+      element.valueAsNumber =
+        Date.now() - new Date().getTimezoneOffset() * 60000;
     });
   }
-
 
   validate(event: Event) {
     let from = (document.getElementById('from') as HTMLInputElement).value;
@@ -45,23 +35,22 @@ hours: string;
     console.log(date);
     console.log(time);
 
-
-    this.rideService.searchByLocationAndTime(from, to, date, time).subscribe(posts => {
-      //console.log(posts);
-
-      if (posts.length !== 0) {
-        this.router.navigate(['/result'], {queryParams:  {from: from, to: to, date: date, time: time}});
+    if (from === '' || to === '') {
+       window.alert('fields cannot be empty');
       }
-
-
-
-    })
-
+    else {
+      this.rideService
+        .searchByLocationAndTime(from, to, date, time)
+        .subscribe(posts => {
+          if (posts.length !== 0) {
+            /**sending parameters to query */
+            this.router.navigate(['/result'], {
+              queryParams: { from, to, date, time }
+            });
+          } else {
+            window.alert('No rides found between the given locations');
+          }
+        });
+    }
+  }
 }
-
-
-
-
-}
-
-
