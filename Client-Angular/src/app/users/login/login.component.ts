@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
+import { UserService } from '../../services/user.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -35,8 +38,20 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.formControls.username);
-    console.log(this.formControls.password);
+    console.log(this.formControls.username.value);
+    console.log(this.formControls.password.value);
+    console.log(this.loginForm.valid);
+    this.userService.login(this.formControls.username.value, this.formControls.password.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          window.alert(data.username);
+          this.router.navigateByUrl('');
+        },
+        error => {
+          window.alert('error');
+        }
+      );
   }
 
 }
