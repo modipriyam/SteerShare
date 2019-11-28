@@ -1,7 +1,7 @@
 'use strict';
 
 //Import specific operations to database
-const postService = require('../services/userServices');
+const postService = require('../services/postServices');
 
 //Create and return a new post in JSON based on the HTTP request
 exports.post = function(req, res){
@@ -31,15 +31,28 @@ exports.put = function(req, res){
 }
 
 //Return a post in JSON based on the search parameter
-exports.get = function(req, res){
-    const resolve = (post) => {
+exports.search = function(req, res){
+    const resolve = (posts) => {
         res.status(200);
-        res.json(post);
+        res.json(posts);
     }
-
-    postService.get(req.params.id)
-        .then(resolve)
-        .catch(renderErrorResponse(res));
+    if(req.query.exact){
+        postService.searchByExactDateTime(req.query)
+                .then(resolve)
+                .catch(renderErrorResponse(res));
+    }
+    else{
+        if(req.query.travel_time){
+            postService.searchByLocationAndTime(req.query)
+                .then(resolve)
+                .catch(renderErrorResponse(res));
+        }
+        else{
+            postService.searchByLocation(req.query)
+                .then(resolve)
+                .catch(renderErrorResponse(res));
+        }
+    }
 };
 
 //Return a list of posts in JSON based on the search parameters
