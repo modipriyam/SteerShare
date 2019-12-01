@@ -1,7 +1,9 @@
 <div style="border: 1px solid black">
     This is the navigation bar that always appears on the top of each page<br>
     <a *ngIf="!loggedin" routerLink="login">Login</a>
-    <a *ngIf="loggedin" (click)="this.userService.logout()">{{this.currentUser.username}}</a>
+
+    <a href = # *ngIf="loggedin" (click)="this.userService.logout()">{{this.currentUser.username}}(LogOut)</a>
+
     &nbsp;<a routerLink="post">Post</a>&nbsp;
     <a routerLink='search'>Search</a>
 </div>
