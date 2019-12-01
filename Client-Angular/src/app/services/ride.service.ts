@@ -38,6 +38,12 @@ export class RideService {
 
   }
 
+
+  public add(post: Post): Observable<Post>{
+    const posts$ = this.http.post<Post>('http://localhost:3000/posts', post);
+    return posts$;
+  }
+
   public searchByExactDateTime(from: string, to: string, travel_date: string, travel_time: string): Observable<Array<Post>> {
     const params = new HttpParams()
       .set('from', from)
