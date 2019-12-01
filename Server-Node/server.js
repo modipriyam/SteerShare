@@ -3,6 +3,7 @@
  * Use MongoDB for the database
  * Use body-parser to interpret the requests
 */
+const config = require('./app/config.json');
 let express = require('express'),
               app = express(),
               port = process.env.PORT || 3000, 
@@ -10,7 +11,7 @@ let express = require('express'),
               bodyParser = require('body-parser');
 
 //Connect to local MongoDB collection Assignment8
-mongoose.connect('mongodb://localhost:27017/final-project', {
+mongoose.connect(config.connection, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
