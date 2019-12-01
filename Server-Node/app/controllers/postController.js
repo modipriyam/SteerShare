@@ -11,7 +11,7 @@ exports.post = function(req, res){
         res.json(post);
     };
 
-    postService.save(newPost)
+    postService.saveRide(newPost)
         .then(resolve)
         .catch(renderErrorResponse(res));
 };

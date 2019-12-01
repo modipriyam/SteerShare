@@ -5,7 +5,16 @@ const Post = mongoose.model('Post');
 
 exports.save = function(params){
     const newUser = new Post(params);
+    const newPost = new Post(post);
     const promise = newPost.save();
+    
+    return promise;
+}
+
+exports.saveRide = function(post){
+    const newPost = new Post(post);
+    const promise = newPost.save();
+    
     return promise;
 }
 

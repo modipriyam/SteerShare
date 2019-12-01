@@ -10,7 +10,8 @@ module.exports = function(app){
         .delete(userController.delete); //Delete one user
 
     app.route('/posts')
-        .get(postController.search); //Fetch one post
+        .get(postController.search) //Fetch one post
+        .post(postController.post);
 
     app.route('/users/authenticate')
         .post(userController.authenticate);
