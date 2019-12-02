@@ -30,6 +30,20 @@ exports.put = function(req, res){
         .catch(renderErrorResponse(res));
 }
 
+
+exports.get = function(req, res){
+    const resolve = (post) => {
+        res.status(200);
+        res.json(post);
+    }
+
+    postService.get(req.params.id)
+        .then(resolve)
+        .catch(renderErrorResponse(res));
+};
+
+
+
 //Return a post in JSON based on the search parameter
 exports.search = function(req, res){
     const resolve = (posts) => {

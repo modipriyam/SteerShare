@@ -40,7 +40,7 @@ const routes: Routes = [
     component: ResultComponent
   },
   {
-    path:'confirmbooking',
+    path:'confirmbooking/:id',
     component : ConfirmbookingComponent
   }
 ];

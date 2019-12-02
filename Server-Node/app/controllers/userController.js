@@ -54,6 +54,8 @@ exports.get = function(req, res){
         .catch(renderErrorResponse(res));
 };
 
+
+
 //Return a list of users in JSON based on the search parameters
 exports.list = function(req, res){
     const resolve = (users) => {

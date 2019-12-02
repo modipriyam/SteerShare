@@ -1,1 +1,24 @@
 <p>confirmbooking works!</p>
+
+
+<h1>YOUR RIDE DETAILS</h1>
+
+<div class=ridedetails>
+
+  <ul>
+
+ <li><span>Starting point: {{post.from}}</span></li><br><br>
+ <li><span>Ending Point: {{post.to}}</span></li><br><br>
+ <li><span>Date: {{post.travel_date}}</span></li><br><br>
+ <li><span>Time: {{post.travel_time}}</span></li><br><br>
+ <li><span> Price: {{post.price}}</span></li><br><br>
+ <li><span>Ride Description: {{post.description}}</span></li>
+
+</ul>
+<button type="submit" (click)="confirmbooking($event)" class="btn btn-success">Confirm Booking</button>
+
+
+</div>
+
+
+
