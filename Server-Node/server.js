@@ -17,6 +17,9 @@ mongoose.connect(config.connection, {
 });
 mongoose.Promise = global.Promise;
 
+app.get("/",(req,res)=>{
+    res.send('Server started');
+});
 
 
 //Adding body parser for handling request and response objects.
@@ -32,6 +35,9 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
+let nodemailer = require('nodemailer');
+
 
 //Initialize app
 let initApp = require('./app/app');

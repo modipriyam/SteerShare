@@ -44,6 +44,10 @@ export class RideService {
 
   }
 
+  public sendEmail(url, data){
+    return this.http.post(url,data);
+  }
+
 
   public add(post: Post): Observable<Post>{
     const posts$ = this.http.post<Post>('http://localhost:3000/posts', post);
