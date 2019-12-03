@@ -29,8 +29,10 @@ export class ConfirmbookingComponent implements OnInit {
 
 confirmBooking(event: Event){
   let user = {
-   email: (document.getElementById('email') as HTMLInputElement).value
+   email: (document.getElementById('email') as HTMLInputElement).value,
+
   }
+  console.log(user.email);
   this.RideService.sendEmail("http://localhost:3000/sendmail",user).subscribe(
     data=>{
       let res: any=data;
