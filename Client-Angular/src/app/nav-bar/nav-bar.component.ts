@@ -16,7 +16,7 @@ export class NavBarComponent implements OnInit {
   constructor(
     private router: Router,
     public userService: UserService
-  ) { 
+  ) {
     if(this.userService.currentUserValue){
       this.loggedin = true;
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -26,4 +26,14 @@ export class NavBarComponent implements OnInit {
   ngOnInit() {
   }
 
+  ifLoggedIn(event:Event){
+    if(this.userService.currentUserValue){
+      this.router.navigate(['/post']);
+      console.log('if')
+
+  } else{
+    this.router.navigate(['/login']);
+    console.log('else')
+  }
+}
 }
