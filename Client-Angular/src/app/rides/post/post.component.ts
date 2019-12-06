@@ -13,14 +13,14 @@ export class PostComponent implements OnInit {
   currentDate: string;
   hours: string;
 
- post : Post = new Post();
- from: string;
- to: string;
- travel_date: string;
- travel_time: string;
- seats: string;
- price: string;
- description: string;
+  post: Post = new Post();
+  from: string;
+  to: string;
+  travel_date: string;
+  travel_time: string;
+  seats: string;
+  price: string;
+  description: string;
 
 
 
@@ -29,18 +29,18 @@ export class PostComponent implements OnInit {
   ngOnInit() {
 
     this.currentDate = new Date().toISOString().split('T')[0];
-      let date = new Date();
-      this.hours = date.getHours().toLocaleString();
-      const element = document.getElementById('date') as HTMLInputElement;
-      element.valueAsNumber =
-        Date.now() - new Date().getTimezoneOffset() * 60000;
+    let date = new Date();
+    this.hours = date.getHours().toLocaleString();
+    const element = document.getElementById('date') as HTMLInputElement;
+    element.valueAsNumber =
+      Date.now() - new Date().getTimezoneOffset() * 60000;
   }
 
 
-  addRide(event: Event){
+  addRide(event: Event) {
     console.log('Add clicked');
     console.log(this.post);
-    let val1=this.post.from;
+    let val1 = this.post.from;
     console.log(val1);
     this.RideService.add(this.post).subscribe();
   }

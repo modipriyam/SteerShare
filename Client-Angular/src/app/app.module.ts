@@ -12,6 +12,8 @@ import { ResultComponent } from './result/result.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './users/register/register.component';
+import { ConfirmbookingComponent } from './confirmbooking/confirmbooking.component';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -22,14 +24,17 @@ import { RegisterComponent } from './users/register/register.component';
     LoginComponent,
     HomeComponent,
     ResultComponent,
-    RegisterComponent
+    RegisterComponent,
+    ConfirmbookingComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

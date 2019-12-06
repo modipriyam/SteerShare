@@ -4,6 +4,6 @@
 
     <a href = # *ngIf="loggedin" (click)="this.userService.logout()">{{this.currentUser.username}}(LogOut)</a>
 
-    &nbsp;<a routerLink="post">Post</a>&nbsp;
+    &nbsp;<a (click)="ifLoggedIn($event)">Post</a>&nbsp;
     <a routerLink='search'>Search</a>
 </div>

@@ -1,4 +1,5 @@
 
+
 import { Post } from './../models/post.model';
 import { Location } from './../rides/locations.model';
 import { Injectable, EventEmitter} from '@angular/core';
@@ -24,6 +25,11 @@ export class RideService {
     return locations$;
   }
 
+  public view(id: string): Observable<Post>{
+    const posts$ = this.http.get<Post>('http://localhost:3000/posts/'+id);
+    return posts$;
+  }
+
   public searchByLocationAndTime(from: string, to: string, travel_date: string, travel_time: string): Observable<Array<Post>> {
     const params = new HttpParams()
       .set('from', from)
@@ -36,6 +42,10 @@ export class RideService {
 
     return posts$;
 
+  }
+
+  public sendEmail(url, data){
+    return this.http.post(url,data);
   }
 
 
