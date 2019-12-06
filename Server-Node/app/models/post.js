@@ -12,14 +12,27 @@ let Post = new Schema({
         type: String,
         required: "destination is required"
     },
-    travevl_date: {
+    travel_date: {
         type: String, 
         required: "Start date is required"
     },
     travel_time: {
         type: String,
         required: "Start time is required"
+    },
+    seats: {
+        type: String,
+        required: "seats is required"
+    },
+    price:{
+        type: String,
+        required: "price is required"
+    },
+
+    description:{
+        type: String
     }
+
 }, {
     versionKey: false
 });

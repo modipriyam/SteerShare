@@ -10,7 +10,10 @@ import { LoginComponent } from './users/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ResultComponent } from './result/result.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './users/register/register.component';
+import { ConfirmbookingComponent } from './confirmbooking/confirmbooking.component';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -20,13 +23,18 @@ import { FormsModule } from '@angular/forms';
     SearchComponent,
     LoginComponent,
     HomeComponent,
-    ResultComponent
+    ResultComponent,
+    RegisterComponent,
+    ConfirmbookingComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

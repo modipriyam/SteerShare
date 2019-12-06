@@ -1,15 +1,21 @@
+
+
+import { Post } from './../models/post.model';
 import { Location } from './../rides/locations.model';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter} from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 //Import data models
-import { Post } from '../models/post.model';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class RideService {
+
+
 
   constructor(private http: HttpClient) { }
 
@@ -19,13 +25,32 @@ export class RideService {
     return locations$;
   }
 
+  public view(id: string): Observable<Post>{
+    const posts$ = this.http.get<Post>('http://localhost:3000/posts/'+id);
+    return posts$;
+  }
+
   public searchByLocationAndTime(from: string, to: string, travel_date: string, travel_time: string): Observable<Array<Post>> {
     const params = new HttpParams()
       .set('from', from)
       .set('to', to)
       .set('travel_date', travel_date)
       .set('travel_time', travel_time);
-    const posts$ = this.http.get<Array<Post>>("http://localhost:3000/posts", {params});
+    let posts$ = this.http.get<Array<Post>>("http://localhost:3000/posts", {params});
+
+
+
+    return posts$;
+
+  }
+
+  public sendEmail(url, data){
+    return this.http.post(url,data);
+  }
+
+
+  public add(post: Post): Observable<Post>{
+    const posts$ = this.http.post<Post>('http://localhost:3000/posts', post);
     return posts$;
   }
 
@@ -48,4 +73,7 @@ export class RideService {
     const posts$ = this.http.get<Array<Post>>("http://localhost:3000/posts", {params});
     return posts$;
   }
+
+
+
 }

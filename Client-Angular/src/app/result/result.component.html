@@ -1,1 +1,17 @@
-<p>result works!</p>
+<h2>RIDES FOUND</h2>
+<div *ngFor="let post of posts">
+
+
+
+<p>FROM: {{post.from}}</p>
+<p>TO: {{post.to}}</p>
+<p>DATE: {{post.travel_date}}</p>
+<p>TIME: {{post.travel_time}}</p>
+<p>PRICE: {{post.price}}</p>
+<p>DESCRIPTION: {{post.description}}</p>
+
+<input id="book" [routerLink]="['/confirmbooking', post.id]" routerLinkActive="router-link-active"   type="submit" value="Book" >
+<p>-----------------------------------------------------</p>
+
+</div>
+

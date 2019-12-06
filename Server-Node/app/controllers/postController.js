@@ -11,7 +11,7 @@ exports.post = function(req, res){
         res.json(post);
     };
 
-    postService.save(newPost)
+    postService.saveRide(newPost)
         .then(resolve)
         .catch(renderErrorResponse(res));
 };
@@ -29,6 +29,20 @@ exports.put = function(req, res){
         .then(resolve)
         .catch(renderErrorResponse(res));
 }
+
+
+exports.get = function(req, res){
+    const resolve = (post) => {
+        res.status(200);
+        res.json(post);
+    }
+
+    postService.get(req.params.id)
+        .then(resolve)
+        .catch(renderErrorResponse(res));
+};
+
+
 
 //Return a post in JSON based on the search parameter
 exports.search = function(req, res){

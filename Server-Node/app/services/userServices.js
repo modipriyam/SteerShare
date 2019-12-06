@@ -1,7 +1,16 @@
 'use strict';
 
+const config = require('../../app/config.json');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+
+module.exports = {
+    authenticate,
+    register
+};
+
 
 exports.save = function(params){
     const newUser = new User(params);
@@ -28,4 +37,37 @@ exports.delete = function(id){
     const promise = User.remove({_id: id}).exec();
     return promise;
 }
+
+async function authenticate({username, password}){
+    console.log(config.secret);
+    console.log(username);
+    console.log(password);
+    const user = await User.findOne({username});
+    if(user && bcrypt.compareSync(password, user.password_hash)){
+        const { password_hash, ...userWithoutHash } = user.toObject();
+        const token = jwt.sign({ sub: user._id}, config.secret);
+        return {
+            ...userWithoutHash, 
+            token
+        };
+    }
+    else
+        console.log("Something is wrong");
+}
+
+async function register(params){
+    if(await User.findOne({username: params.username})){
+        throw 'Username "' + params.username + '" already exists';
+    }
+
+    const user = new User(params);
+
+    if(params.password) {
+        user.password_hash = bcrypt.hashSync(params.password, 10);
+    }
+
+    await user.save();
+}
+
+
 

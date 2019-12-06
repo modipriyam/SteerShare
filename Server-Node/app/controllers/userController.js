@@ -16,6 +16,18 @@ exports.post = function(req, res){
         .catch(renderErrorResponse(res));
 };
 
+exports.authenticate = function(req, res, next){
+    userService.authenticate(req.body)
+        .then(user => user ? res.json(user) : res.status(400).json({ message: 'Username or password is incorrect' }))
+        .catch(err => next(err));
+}
+
+exports.register = function(req, res, next){
+    userService.register(req.body)
+        .then(()=> res.json({}))
+        .catch(err => next(err));
+}
+
 //Return an updated user in JSON based on the update parameters
 exports.put = function(req, res){
     const user = Object.assign({}, req.body);
@@ -41,6 +53,8 @@ exports.get = function(req, res){
         .then(resolve)
         .catch(renderErrorResponse(res));
 };
+
+
 
 //Return a list of users in JSON based on the search parameters
 exports.list = function(req, res){
