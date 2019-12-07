@@ -9,6 +9,7 @@ import { RegisterComponent } from './users/register/register.component';
 import { PostComponent } from "./rides/post/post.component";
 import { SearchComponent } from "./rides/search/search.component";
 import { HomeComponent } from './home/home.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 
@@ -42,7 +43,14 @@ const routes: Routes = [
   {
     path:'confirmbooking/:id',
     component : ConfirmbookingComponent
+  },
+
+  {
+    path: 'chat',
+    component: ChatComponent
   }
+
+
 ];
 
 @NgModule({
