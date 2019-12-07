@@ -16,6 +16,7 @@ import { ConfirmbookingComponent } from './confirmbooking/confirmbooking.compone
 import { HttpModule } from '@angular/http';
 import { ChatComponent } from './chat/chat.component';
 import { ChatService   } from './services/chat.service';
+import { AutocompleteComponent } from './rides/search/google-places.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,8 @@ import { ChatService   } from './services/chat.service';
     ResultComponent,
     RegisterComponent,
     ConfirmbookingComponent,
-    ChatComponent
-
+    ChatComponent,
+    AutocompleteComponent
   ],
   imports: [
     BrowserModule,
