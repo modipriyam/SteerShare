@@ -15,6 +15,9 @@ import { RegisterComponent } from './users/register/register.component';
 import { ConfirmbookingComponent } from './confirmbooking/confirmbooking.component';
 import { HttpModule } from '@angular/http';
 import { PersonalHomeComponent } from './users/personal-home/personal-home.component';
+import { ChatComponent } from './chat/chat.component';
+import { ChatService   } from './services/chat.service';
+import { AutocompleteComponent } from './rides/search/google-places.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +30,9 @@ import { PersonalHomeComponent } from './users/personal-home/personal-home.compo
     ResultComponent,
     RegisterComponent,
     ConfirmbookingComponent,
-    PersonalHomeComponent
-
+    PersonalHomeComponent,
+    ChatComponent,
+    AutocompleteComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,7 @@ import { PersonalHomeComponent } from './users/personal-home/personal-home.compo
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
