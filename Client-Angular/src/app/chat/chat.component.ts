@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../services/chat.service';
 
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -13,6 +14,8 @@ export class ChatComponent implements OnInit {
 
   constructor(private chatservice: ChatService) { }
 
+
+
   ngOnInit() {
     this.chatservice
       .getMessages()
@@ -20,6 +23,9 @@ export class ChatComponent implements OnInit {
         this.messages.push(message);
       });
   }
+
+
+  
   
 
   sendMessage(){

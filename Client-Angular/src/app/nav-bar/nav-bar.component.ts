@@ -40,6 +40,19 @@ export class NavBarComponent implements OnInit {
 
   } else{
     this.router.navigate(['/login']);
-  }
-}
+  }}
+
+
+  ifLoggedInchat(event:Event){
+  if(this.userService.currentUserValue){
+    this.router.navigate(['/chat']);
+  } else{
+  this.router.navigate(['/login']);
+  }}
+
+
+
+
+
+
 }
