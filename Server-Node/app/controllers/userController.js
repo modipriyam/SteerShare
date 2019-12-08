@@ -2,6 +2,8 @@
 
 //Import specific operations to database
 const userService = require('../services/userServices');
+const multer = require('multer');
+const fs = require('fs');
 
 //Create and return a new user in JSON based on the HTTP request
 exports.post = function(req, res){
@@ -22,10 +24,46 @@ exports.authenticate = function(req, res, next){
         .catch(err => next(err));
 }
 
+
 exports.register = function(req, res, next){
     userService.register(req.body)
         .then(()=> res.json({}))
         .catch(err => next(err));
+}
+
+const storage = multer.diskStorage({
+    destination: function(req, file, callback){
+        callback(null, './profile_imgs');
+    },
+    filename: function(req, file, callback){
+        callback(null, file.originalname);
+    }
+})
+
+exports.upload = multer({storage: storage}).single('profile_img');
+
+exports.uploadRes = function(req, res){
+    console.log(req.file);
+    res.writeHead(200);
+    res.end("Upload successful");
+}
+
+exports.image = function(req, res){
+    console.log("here");
+    console.log(req.params.filename);
+    fs.readFile("profile_imgs/"+req.params.filename, function(err, data){
+        if(err) {
+            res.writeHead(404);
+            res.end(JSON.stringify(err));
+            return;
+        }
+
+        else {
+            res.writeHead(200);
+            //res.setHeader('Content-Type', 'text/html');
+            res.end(data);
+        }
+    })
 }
 
 //Return an updated user in JSON based on the update parameters

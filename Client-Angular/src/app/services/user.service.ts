@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { User } from '../models/user.model';
+import { EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,9 @@ export class UserService {
 
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
+  @Output() getCurrentUser: EventEmitter<any> = new EventEmitter();
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -23,8 +25,14 @@ export class UserService {
     return this.currentUserSubject.value;
   }
 
-  public register(user: User){
+  public register(user: User, profileImgName: string){
+    user.profileImgName = profileImgName;
     return this.http.post<any>(`${environment.serverBaseURL}/users/register`, user);
+  }
+
+  public uploadImage(formData: FormData){
+    console.log(formData);
+    return this.http.post(`${environment.serverBaseURL}/users/uploadProfileImage`, formData);
   }
 
   public login(username: string, password: string){
@@ -34,6 +42,7 @@ export class UserService {
           if(user && user.token){
             localStorage.setItem('currentUser', JSON.stringify(user));
             this.currentUserSubject.next(user);
+            this.getCurrentUser.emit(user);
           }
 
           return user;

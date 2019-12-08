@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Inject} from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
@@ -16,7 +16,8 @@ export class RegisterComponent implements OnInit {
   constructor(
       private formBuilder: FormBuilder,
       private router: Router, 
-      private userService: UserService
+      private userService: UserService,
+      private el: ElementRef
   ) { 
     if(this.userService.currentUserValue){
       this.router.navigate(['/']);
@@ -28,7 +29,8 @@ export class RegisterComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      profileImage: ['', Validators.required]
     });
   }
 
@@ -36,8 +38,18 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.controls;
   }
 
+
   onSubmit(){
-    this.userService.register(this.registerForm.value)
+    let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#profileImg');
+    let profileImgName = inputEl.files.item(0).name;
+    let formData = new FormData();
+    if(inputEl.files.length > 0){
+      formData.append('profile_img', inputEl.files.item(0));
+      console.log(formData);
+      this.userService.uploadImage(formData).subscribe();
+    }
+
+    this.userService.register(this.registerForm.value, profileImgName)
       .pipe(first())
       .subscribe(
         data => {

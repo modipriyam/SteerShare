@@ -21,4 +21,11 @@ module.exports = function(app){
     
     app.route('/users/register')
         .post(userController.register);
+    
+    app.route('/users/uploadProfileImage')
+        .post(userController.upload, userController.uploadRes);
+    
+    app.route('/users/profileImg/:filename')
+        .get(userController.image);
+
 };
