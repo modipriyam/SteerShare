@@ -43,9 +43,7 @@ const storage = multer.diskStorage({
 exports.upload = multer({storage: storage}).single('profile_img');
 
 exports.uploadRes = function(req, res){
-    console.log(req.file);
-    res.writeHead(200);
-    res.end("Upload successful");
+    res.json({});
 }
 
 exports.image = function(req, res){
