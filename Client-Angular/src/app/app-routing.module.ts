@@ -6,10 +6,10 @@ import { Routes, RouterModule } from '@angular/router';
 //import the generated components
 import { LoginComponent } from "./users/login/login.component";
 import { RegisterComponent } from './users/register/register.component';
+import { PersonalHomeComponent } from './users/personal-home/personal-home.component';
 import { PostComponent } from "./rides/post/post.component";
 import { SearchComponent } from "./rides/search/search.component";
 import { HomeComponent } from './home/home.component';
-
 
 
 
@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'personal_home',
+    component: PersonalHomeComponent
   },
   {
     path: 'post',

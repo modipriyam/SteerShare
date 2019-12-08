@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './users/register/register.component';
 import { ConfirmbookingComponent } from './confirmbooking/confirmbooking.component';
 import { HttpModule } from '@angular/http';
+import { PersonalHomeComponent } from './users/personal-home/personal-home.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HttpModule } from '@angular/http';
     HomeComponent,
     ResultComponent,
     RegisterComponent,
-    ConfirmbookingComponent
+    ConfirmbookingComponent,
+    PersonalHomeComponent
 
   ],
   imports: [

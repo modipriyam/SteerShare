@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const formdata = require('form-data');
 
 module.exports = {
     authenticate,
@@ -39,9 +40,7 @@ exports.delete = function(id){
 }
 
 async function authenticate({username, password}){
-    console.log(config.secret);
-    console.log(username);
-    console.log(password);
+
     const user = await User.findOne({username});
     if(user && bcrypt.compareSync(password, user.password_hash)){
         const { password_hash, ...userWithoutHash } = user.toObject();
@@ -59,7 +58,7 @@ async function register(params){
     if(await User.findOne({username: params.username})){
         throw 'Username "' + params.username + '" already exists';
     }
-
+    console.log(params);
     const user = new User(params);
 
     if(params.password) {

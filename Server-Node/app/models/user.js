@@ -20,6 +20,10 @@ let User = new Schema({
         type: String, 
         required: "Last name is required"
     },
+    profileImgName: {
+        type: String, 
+        required: "Profile picture is required"
+    },
     createDate: {
         type: Date, 
         default: Date.now

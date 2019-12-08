@@ -25,8 +25,14 @@ export class UserService {
     return this.currentUserSubject.value;
   }
 
-  public register(user: User){
+  public register(user: User, profileImgName: string){
+    user.profileImgName = profileImgName;
     return this.http.post<any>(`${environment.serverBaseURL}/users/register`, user);
+  }
+
+  public uploadImage(formData: FormData){
+    console.log(formData);
+    return this.http.post(`${environment.serverBaseURL}/users/uploadProfileImage`, formData);
   }
 
   public login(username: string, password: string){
