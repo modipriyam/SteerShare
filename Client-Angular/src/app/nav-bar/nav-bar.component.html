@@ -4,7 +4,7 @@
 
     <a href ="#" *ngIf="loggedin" (click)="logout()">{{this.currentUser.username}}(LogOut)</a>
 
-    &nbsp;<a (click)="ifLoggedIn($event)">Post</a>&nbsp;
+    &nbsp;<a (click)="ifLoggedIn($event)" id="post">Post</a>&nbsp;
     <a routerLink='search'>Search</a>&nbsp;
-    <a routerLink='chat'>Chat</a>
+    <a (click)="ifLoggedInchat($event)" id="chat">Chat</a>
 </div>
