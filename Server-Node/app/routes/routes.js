@@ -3,6 +3,7 @@
 module.exports = function(app){
     const userController = require('../controllers/userController');
     const postController = require('../controllers/postController');
+    const carController = require('../controllers/carController');
 
     app.route('/user/:id')
         .get(userController.get) //Fetch one user
@@ -27,5 +28,11 @@ module.exports = function(app){
     
     app.route('/users/profileImg/:filename')
         .get(userController.image);
+
+    app.route('/cars')
+        .post(carController.add);
+    
+    app.route('/cars/:id')
+        .get(carController.get);
 
 };

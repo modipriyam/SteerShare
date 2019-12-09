@@ -47,8 +47,6 @@ exports.uploadRes = function(req, res){
 }
 
 exports.image = function(req, res){
-    console.log("here");
-    console.log(req.params.filename);
     fs.readFile("profile_imgs/"+req.params.filename, function(err, data){
         if(err) {
             res.writeHead(404);
