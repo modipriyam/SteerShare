@@ -14,6 +14,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './users/register/register.component';
 import { ConfirmbookingComponent } from './confirmbooking/confirmbooking.component';
 import { HttpModule } from '@angular/http';
+import { PersonalHomeComponent } from './users/personal-home/personal-home.component';
+import { ChatComponent } from './chat/chat.component';
+import { ChatService   } from './services/chat.service';
+import { AutocompleteComponent } from './rides/search/google-places.component';
+import { CarComponent } from './users/car/car.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +30,11 @@ import { HttpModule } from '@angular/http';
     HomeComponent,
     ResultComponent,
     RegisterComponent,
-    ConfirmbookingComponent
-
+    ConfirmbookingComponent,
+    PersonalHomeComponent,
+    ChatComponent,
+    AutocompleteComponent,
+    CarComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +44,7 @@ import { HttpModule } from '@angular/http';
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

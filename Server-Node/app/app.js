@@ -6,6 +6,8 @@ module.exports = function(app){
     //Register the data models here
     let userModel = require('./models/user');
     let postModel = require('./models/post');
+    let carModel = require('./models/car');
+    let rideModel= require('./models/ride')
     
     //Initialize routes
     let routes = require("./routes/routes");

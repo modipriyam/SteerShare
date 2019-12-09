@@ -13,11 +13,37 @@ let express = require('express'),
               app = express(),
               port = process.env.PORT || 3000, 
               mongoose = require('mongoose'),
-              bodyParser = require('body-parser');
+              bodyParser = require('body-parser'),
+              http = require('http'),
+              server = http.createServer(app);
+              socketIO = require('socket.io');
+              io = socketIO(server);
 
               
 
-//Connect to local MongoDB collection Assignment8
+
+//Chatting Socket
+users = [];
+io.on('connection', (socket)=> {
+  console.log('user connected');
+  socket.on('setUsername', function(data) {
+    console.log(data);
+    
+    if(users.indexOf(data) > -1) {
+       socket.emit('userExists', data + ' username is taken! Try some other username.');
+    } else {
+       users.push(data);
+       socket.emit('userSet', {username: data});
+    }
+ });
+ 
+ socket.on('msg', function(data) {
+    //Send message to everyone
+    io.sockets.emit('newmsg', data);
+ })
+});
+
+//Connect to local MongoDB collection
 mongoose.connect(config.connection, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -43,6 +69,8 @@ app.use(function (req, res, next) {
 app.get("/",(req,res)=>{
     res.send('Server started');
 });
+
+
 
 //const details = require();
 
@@ -417,5 +445,7 @@ let nodemailer = require('nodemailer');
 let initApp = require('./app/app');
 initApp(app);
 
-app.listen(port);
+
+server.listen(port);
+
 console.log('RESTful API server started on: ' + port);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
@@ -10,30 +10,49 @@ import { Router } from '@angular/router';
 })
 export class NavBarComponent implements OnInit {
 
+  currentUser: User;
   loggedin: boolean;
-  currentUser: JSON;
 
   constructor(
     private router: Router,
     public userService: UserService
-  ) {
-    if(this.userService.currentUserValue){
-      this.loggedin = true;
-      this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    }
-  }
+  ) {}
 
   ngOnInit() {
+    if(this.userService.currentUserValue){
+      this.loggedin = true;
+      this.currentUser = this.userService.currentUserValue;
+    }
+    this.userService.getCurrentUser.subscribe((user)=>{
+      this.loggedin = true;
+      this.currentUser = user;
+    })
+  }
+
+  logout(){
+    this.loggedin = false;
+    this.userService.logout();
   }
 
   ifLoggedIn(event:Event){
     if(this.userService.currentUserValue){
       this.router.navigate(['/post']);
-      console.log('if')
 
   } else{
     this.router.navigate(['/login']);
-    console.log('else')
-  }
-}
+  }}
+
+
+  ifLoggedInchat(event:Event){
+  if(this.userService.currentUserValue){
+    this.router.navigate(['/chat']);
+  } else{
+  this.router.navigate(['/login']);
+  }}
+
+
+
+
+
+
 }

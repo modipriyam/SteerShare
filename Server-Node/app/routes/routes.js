@@ -3,6 +3,8 @@
 module.exports = function(app){
     const userController = require('../controllers/userController');
     const postController = require('../controllers/postController');
+    const carController = require('../controllers/carController');
+    const rideController = require('../controllers/rideController');
 
     app.route('/user/:id')
         .get(userController.get) //Fetch one user
@@ -21,4 +23,23 @@ module.exports = function(app){
     
     app.route('/users/register')
         .post(userController.register);
+    
+    app.route('/users/uploadProfileImage')
+        .post(userController.upload, userController.uploadRes);
+    
+    app.route('/users/profileImg/:filename')
+        .get(userController.image);
+
+    app.route('/cars')
+        .post(carController.add);
+    
+    app.route('/cars/:id')
+        .get(carController.get);
+
+    app.route('/rides')
+        .get(rideController.get);
+    
+    app.route('/rides/:id')
+        .get(rideController.get);
+    
 };
