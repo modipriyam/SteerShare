@@ -23,14 +23,24 @@ let express = require('express'),
 
 
 //Chatting Socket
+users = [];
 io.on('connection', (socket)=> {
   console.log('user connected');
-
-
-socket.on('new-message',(message) => {
-  io.emit(message);
-  console.log(message);
-});
+  socket.on('setUsername', function(data) {
+    console.log(data);
+    
+    if(users.indexOf(data) > -1) {
+       socket.emit('userExists', data + ' username is taken! Try some other username.');
+    } else {
+       users.push(data);
+       socket.emit('userSet', {username: data});
+    }
+ });
+ 
+ socket.on('msg', function(data) {
+    //Send message to everyone
+    io.sockets.emit('newmsg', data);
+ })
 });
 
 //Connect to local MongoDB collection

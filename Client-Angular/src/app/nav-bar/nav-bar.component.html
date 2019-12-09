@@ -5,5 +5,5 @@
     &nbsp;<a href = "#" *ngIf="loggedin" (click)="logout()">Log Out</a>
     &nbsp;<a (click)="ifLoggedIn($event)">Post</a>&nbsp;
     <a routerLink='search'>Search</a>&nbsp;
-    <a routerLink='chat'>Chat</a>
+    <a (click)="ifLoggedInchat($event)" id="chat">Chat</a>
 </div>
