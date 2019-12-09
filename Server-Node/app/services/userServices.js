@@ -58,7 +58,6 @@ async function register(params){
     if(await User.findOne({username: params.username})){
         throw 'Username "' + params.username + '" already exists';
     }
-    console.log(params);
     const user = new User(params);
 
     if(params.password) {

@@ -5,5 +5,15 @@
 <h2>Your finished transactions</h2>
 
 <h2>Your car</h2>
+<div *ngIf="currentCar">
+    Brand: {{currentCar.brand}}
+    Model: {{currentCar.model}}
+    Color: {{currentCar.color}}
+    Plate Number: {{currentCar.plate}}
+</div>
+<div *ngIf="!currentCar">
+    <a routerLink="/car">Register Your Car</a>
+</div>
+
 
 <img src='http://localhost:3000/users/profileImg/{{currentUser.profileImgName}}' width="100" height="100">

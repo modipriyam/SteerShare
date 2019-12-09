@@ -31,12 +31,10 @@ export class UserService {
   }
 
   public uploadImage(formData: FormData){
-    console.log(formData);
     return this.http.post(`${environment.serverBaseURL}/users/uploadProfileImage`, formData);
   }
 
   public login(username: string, password: string){
-    console.log("From Service: " + username + password);
     return this.http.post<any>(`${environment.serverBaseURL}/users/authenticate`, {username, password})
       .pipe(map(user=>{
           if(user && user.token){

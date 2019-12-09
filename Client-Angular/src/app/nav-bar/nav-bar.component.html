@@ -1,10 +1,9 @@
 <div style="border: 1px solid black">
     This is the navigation bar that always appears on the top of each page<br>
     <a *ngIf="!loggedin" routerLink="login">Login</a>
-
-    <a href ="#" *ngIf="loggedin" (click)="logout()">{{this.currentUser.username}}(LogOut)</a>
-
-    &nbsp;<a (click)="ifLoggedIn($event)" id="post">Post</a>&nbsp;
+    <a href ="#" *ngIf="loggedin" routerLink="personal_home">{{this.currentUser.username}}</a>
+    &nbsp;<a href = "#" *ngIf="loggedin" (click)="logout()">Log Out</a>
+    &nbsp;<a (click)="ifLoggedIn($event)">Post</a>&nbsp;
     <a routerLink='search'>Search</a>&nbsp;
     <a (click)="ifLoggedInchat($event)" id="chat">Chat</a>
 </div>
