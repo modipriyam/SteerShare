@@ -7,14 +7,14 @@
     <div class="slim-header-right">
       <div class="dropdown dropdown-c">
         <a href=# *ngIf="loggedin" class="logged-user" data-toggle="dropdown">
-          <img src="assets/img/img1.jpg" alt="">
-          <span><a href ="#" *ngIf="loggedin" routerLink="personal_home">{{this.currentUser.username}}</a></span>&nbsp;
+          <img src="http://localhost:3000/users/profileImg/{{currentUser.profileImgName}}" alt="">
+          <span><a href ="#" *ngIf="loggedin" >{{this.currentUser.username}}</a></span>&nbsp;
           <i class="fa fa-angle-down"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right">
           <nav class="nav">
-            <a href = # *ngIf="loggedin" class="nav-link"><i class="ion-md-person"></i>&nbsp;View Profile</a>
-            <a href = # *ngIf="loggedin" class="nav-link"><i class="ion-md-options"></i>&nbsp;Edit Profile</a>
+            <a href = # *ngIf="loggedin" class="nav-link" routerLink="personal_home"><i class="ion-md-person"></i>&nbsp;View Profile</a>
+
             <a href = # *ngIf="loggedin" (click)="this.userService.logout()" class="nav-link"><i class="ion-md-power"></i>&nbsp;{{this.currentUser.username}}(LogOut)</a>
           </nav>
         </div><!-- dropdown-menu -->
