@@ -43,14 +43,10 @@ const storage = multer.diskStorage({
 exports.upload = multer({storage: storage}).single('profile_img');
 
 exports.uploadRes = function(req, res){
-    console.log(req.file);
-    res.writeHead(200);
-    res.end("Upload successful");
+    res.json({});
 }
 
 exports.image = function(req, res){
-    console.log("here");
-    console.log(req.params.filename);
     fs.readFile("profile_imgs/"+req.params.filename, function(err, data){
         if(err) {
             res.writeHead(404);

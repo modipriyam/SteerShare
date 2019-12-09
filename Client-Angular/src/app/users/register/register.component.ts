@@ -46,14 +46,14 @@ export class RegisterComponent implements OnInit {
     if(inputEl.files.length > 0){
       formData.append('profile_img', inputEl.files.item(0));
       console.log(formData);
-      this.userService.uploadImage(formData).subscribe();
     }
 
     this.userService.register(this.registerForm.value, profileImgName)
       .pipe(first())
       .subscribe(
         data => {
-          window.alert("Registration successful!");
+          this.userService.uploadImage(formData).subscribe();
+          this.router.navigate(['/login']);
         },
         error => {
           window.alert(error);
