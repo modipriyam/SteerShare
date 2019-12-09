@@ -18,7 +18,7 @@ export class SearchComponent implements OnInit {
   formattedEstablishmentAddress: string;
   phone: string;
 
-  constructor(private rideService: RideService, private router: Router, public zone:NgZone) {}
+  constructor(private rideService: RideService, private router: Router, public zone: NgZone) { }
 
   ngOnInit() {
     this.rideService.list().subscribe(locations => {
@@ -119,16 +119,21 @@ export class SearchComponent implements OnInit {
 
 
   validate(event: Event) {
-    let from = (document.getElementById('from') as HTMLInputElement).value;
-    let to = (document.getElementById('to') as HTMLInputElement).value;
+    //let from = (document.getElementById('from') as HTMLInputElement).value;
+    //let to = (document.getElementById('to') as HTMLInputElement).value;
+    let from = this.formattedAddress;
+    let to= this.formattedEstablishmentAddress;
     let date = (document.getElementById('date') as HTMLInputElement).value;
     let time = (document.getElementById('time') as HTMLInputElement).value;
     console.log(date);
     console.log(time);
+    //console.log(from);
+    console.log(this.formattedAddress);
+    console.log(this.getCity);
 
-    if (from === '' || to === '') {
-       window.alert('fields cannot be empty');
-      }
+    if (from === undefined || to === undefined) {
+      window.alert('fields cannot be empty');
+    }
     else {
       this.rideService
         .searchByLocationAndTime(from, to, date, time)
