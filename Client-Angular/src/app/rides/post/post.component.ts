@@ -46,9 +46,14 @@ export class PostComponent implements OnInit {
   addRide(event: Event) {
     console.log('Add clicked');
     console.log(this.post);
-    let val1 = this.post.from;
-    console.log(val1);
+    let from = this.formattedAddress;
+    let to= this.formattedEstablishmentAddress;
+    this.post.from=from;
+    this.post.to=to;
+    console.log(this.post.from);
+    console.log(this.post);
     this.RideService.add(this.post).subscribe();
+    window.location.reload();
   }
   getAddress(place: object) {
     this.address = place['formatted_address'];
