@@ -1,19 +1,19 @@
 <div class="no-style">
         <div class="container">
-            <h1>Starting Destination</h1>
+            <h3>Starting Destination</h3>
             <form>
               <div class="form-group">
-                <label for="name">Enter start Location </label>
-                <input type="text" [(ngModel)]='post.from' class="form-control" name="from" id="name">
+                <!-- <label for="name">Enter start Location </label> -->
+                <!-- <input type="text" [(ngModel)]='post.from' class="form-control" name="from" id="from"> -->
                 <AutocompleteComponent [(ngModel)]='post.from' name="from" id="name" (setAddress)="getAddress($event)" adressType="geocode"></AutocompleteComponent>
 
               </div>
 
-            <h1>Ending Destination</h1>
+            <h3>Ending Destination</h3>
 
               <div class="form-group">
-                <label for="">Enter end Location</label>
-                <input type="text" [(ngModel)]='post.to' class="form-control" name="to" id="" required>
+                <!-- <label for="">Enter end Location</label> -->
+                <!-- <input type="text" [(ngModel)]='post.to' class="form-control" name="to" id="to" required> -->
                 <AutocompleteComponent (setAddress)="getEstablishmentAddress($event)" [(ngModel)]='post.to' name="to" id="" adressType="geocode"></AutocompleteComponent>
               </div>
 
