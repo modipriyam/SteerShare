@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 let Ride = new Schema({
     username:{
         type: String,
-        
+        required: "username is required"
     },
     
     from: {

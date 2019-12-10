@@ -28,6 +28,17 @@ exports.get = function(req, res){
         .catch(renderErrorResponse(res));
 };
 
+exports.getByUsername = function(req, res){
+    const resolve = (ride) => {
+        res.status(200);
+        res.json(ride);
+    }
+
+    rideServices.get(req.params.username)
+        .then(resolve)
+        .catch(renderErrorResponse(res));
+};
+
 
 //Return a list of rides in JSON based on the search parameters
 exports.list = function(req, res){

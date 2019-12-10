@@ -34,4 +34,11 @@ export class PersonalHomeComponent implements OnInit {
     }
   }
 
+  viewRides(event: Event){
+    if ((this.currentUser = this.userService.currentUserValue)) {
+      console.log(this.currentUser.username);
+
+    }
+  }
+
 }

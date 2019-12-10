@@ -41,5 +41,8 @@ module.exports = function(app){
     
     app.route('/rides/:id')
         .get(rideController.get);
+
+    app.route('/rides/:username')
+        .get(rideController.getByUsername);
     
 };
