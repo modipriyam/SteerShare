@@ -9,6 +9,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 
 
+
+
 @Component({
   selector: 'app-confirmbooking',
   templateUrl: './confirmbooking.component.html',
@@ -17,6 +19,7 @@ import { Http, Response, RequestOptions, Headers } from '@angular/http';
 export class ConfirmbookingComponent implements OnInit {
   post: Post;
   booking: Booking = new Booking();
+
 
 
   currentUser: User;
@@ -78,6 +81,9 @@ export class ConfirmbookingComponent implements OnInit {
     this.booking.travel_date = this.post.travel_date
     this.booking.travel_time = this.post.travel_time
     console.log(this.booking.from);
+    this.booking.driversusername=this.post.username;
+
+    console.log(this.booking.driversusername);
 
     // tslint:disable-next-line: no-conditional-assignment
     if ((this.currentUser = this.userService.currentUserValue)) {

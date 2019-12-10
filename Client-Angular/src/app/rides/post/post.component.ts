@@ -17,7 +17,7 @@ import { Car } from 'src/app/models/car.model';
 export class PostComponent implements OnInit {
   currentUser: User;
   currentCar: Car;
-  
+
   currentDate: string;
   hours: string;
 
@@ -56,7 +56,7 @@ export class PostComponent implements OnInit {
       this.router.navigate(['/login'], {queryParams: {returnUrl: this.router.url}});
     }
 
-    
+
     this.currentDate = new Date().toISOString().split('T')[0];
     let date = new Date();
     this.hours = date.getHours().toLocaleString();

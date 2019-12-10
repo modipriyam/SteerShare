@@ -43,6 +43,11 @@ let Ride = new Schema({
         required:"userid is required"
     },
 
+    driversusername: {
+        type: String,
+        required:"drivers username is required"
+    }
+
 }, {
     versionKey: false
 });

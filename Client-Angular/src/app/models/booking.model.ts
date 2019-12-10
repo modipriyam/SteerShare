@@ -8,4 +8,5 @@ export class Booking {
   price: string;
   description: string;
   email: string;
+  driversusername: string;
 }
