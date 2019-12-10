@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../services/chat.service';
-
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-chat',
@@ -13,7 +13,7 @@ export class ChatComponent implements OnInit {
  room:String;
  messageText:String;
  messageArray:Array<{user:String,message:String}> = [];
- constructor(private _chatService:ChatService){
+ constructor(private _chatService:ChatService, private userService: UserService){
      this._chatService.newUserJoined()
      .subscribe(data=> this.messageArray.push(data));
 
@@ -32,6 +32,9 @@ export class ChatComponent implements OnInit {
     //     this.messages.push(message);
     //   });
   }
+
+
+  ifloggedin
 
 
 
