@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 let Ride = new Schema({
     username:{
         type: String,
-        
+        required: "username is required"
     },
     from: {
         type: String,
@@ -36,6 +36,16 @@ let Ride = new Schema({
 
     email:{
         type: String
+    },
+
+    userid:{
+        type: String,
+        required:"userid is required"
+    },
+
+    driversusername: {
+        type: String,
+        required:"drivers username is required"
     }
 
 }, {

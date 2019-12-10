@@ -20,7 +20,8 @@ exports.saveRide = function(ride){
 }
 
 
-exports.get = function(id){
+
+exports.get = function(username){
     const promise = Ride.findById(id).exec();
     return promise;
 }

@@ -29,6 +29,7 @@ exports.get = function(req, res){
 };
 
 
+
 //Return a list of rides in JSON based on the search parameters
 exports.list = function(req, res){
     const resolve = (rides) => {
@@ -40,6 +41,7 @@ exports.list = function(req, res){
         .then(resolve)
         .catch(renderErrorResponse(res));
 }
+
 
 let renderErrorResponse = (response) => {
     const errorCallback = (error) => {

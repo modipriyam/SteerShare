@@ -18,8 +18,10 @@ export class BookingService {
   }
 
   public view(id: string): Observable<Booking>{
-    const posts$ = this.http.get<Booking>('http://localhost:3000/rides/'+id);
-    return posts$;
+    const rides$ = this.http.get<Booking>('http://localhost:3000/rides/'+id);
+    return rides$;
   }
+
+
 
 }
