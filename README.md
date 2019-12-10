@@ -9,7 +9,7 @@
 * Harshit Mandada (mandada.h@husky.neu.edu)
 
 ## Project Overview
-### Title : Carpooling application
+### Title : SteerShare
  ### Features: 
 * Find a ride based on passengers parameters
 * Offer a ride (User can offer a ride if he is travelling from X to Y place)
