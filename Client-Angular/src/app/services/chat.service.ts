@@ -15,6 +15,29 @@ export class ChatService {
     this.socket = io(this.url);
    }
 
+
+   joinRoom(data)
+   {
+       this.socket.emit('join',data);
+   }
+
+   newUserJoined()
+   {
+       let observable = new Observable<{user:String, message:String}>(observer=>{
+           this.socket.on('new user joined', (data)=>{
+               observer.next(data);
+           });
+           return () => {this.socket.disconnect();}
+       });
+
+       return observable;
+   }
+
+   leaveRoom(data){
+    this.socket.emit('leave',data);
+}
+
+
    public sendMessage(message){
      this.socket.emit('new-message', message);
    }
