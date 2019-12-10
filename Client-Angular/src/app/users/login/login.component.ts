@@ -44,11 +44,11 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          window.alert(data.username);
+          window.alert('Welcome '+ data.username);
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          window.alert('error');
+          window.alert('Username and Password are not matching,\nif you are a new user please Register');
         }
       );
   }

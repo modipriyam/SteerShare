@@ -10,17 +10,17 @@
       <AutocompleteComponent class="form-control" (setAddress)="getAddress($event)" adressType="geocode"></AutocompleteComponent>
       <!--<input id="from" type="text"  class="form-control m-input">-->
       <br>
-      <b>Start Location : </b> {{formattedAddress}}
+      <!-- <b>Start Location : </b>{{formattedAddress}} -->
     </div>
     <div class="form-group">
       <b><label for="To">To</label></b>
       <br>
       <div class="form-group">
-        <AutocompleteComponent class="form-control" (setAddress)="getEstablishmentAddress($event)" adressType="geocode"></AutocompleteComponent>
+        <AutocompleteComponent class="form-control"   (setAddress)="getEstablishmentAddress($event)"  adressType="geocode"></AutocompleteComponent>
       </div>
       <!--<input id="to" type="text" class="form-control">-->
       <br>
-      <b>End Location : </b> {{formattedEstablishmentAddress}}
+      <!-- <b>End Location : </b> {{formattedEstablishmentAddress}} -->
 
     </div>
   <div class="form-group">

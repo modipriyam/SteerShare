@@ -47,7 +47,7 @@ export class NavBarComponent implements OnInit {
   if(this.userService.currentUserValue){
     this.router.navigate(['/chat']);
   } else{
-  this.router.navigate(['/login']);
+    this.router.navigate(['/chat']);
   }}
 
 

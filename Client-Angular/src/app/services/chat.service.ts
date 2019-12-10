@@ -15,20 +15,68 @@ export class ChatService {
     this.socket = io(this.url);
    }
 
-   public sendMessage(message){
-     this.socket.emit('new-message', message);
+
+  public joinRoom(data)
+   {
+       this.socket.emit('join',data);
    }
 
-   public setUsername(username) {
-    this.socket.emit('setUsername', username);
- };
+  public newUserJoined()
+   {
+       let observable = new Observable<{user:String, message:String}>(observer=>{
+           this.socket.on('new user joined', (data)=>{
+               observer.next(data);
+           });
+           return () => {this.socket.disconnect();}
+       });
 
-   public getMessages = () => {
-    return Observable.create((observer) => {
-        this.socket.on('new-message', (message) => {
-            observer.next(message);
-        });
-    });
+       return observable;
+   }
+
+  public leaveRoom(data){
+    this.socket.emit('leave',data);
 }
+
+
+public userLeftRoom(){
+  let observable = new Observable<{user:String, message:String}>(observer=>{
+      this.socket.on('left room', (data)=>{
+          observer.next(data);
+      });
+      return () => {this.socket.disconnect();}
+  });
+
+  return observable;
 }
+
+
+
+   public sendMessage(message){
+     this.socket.emit('message', message);
+   }
+
+//    public setUsername(username) {
+//     this.socket.emit('setUsername', username);
+//  };
+
+
+ newMessageReceived(){
+  let observable = new Observable<{user:String, message:String}>(observer=>{
+      this.socket.on('new message', (data)=>{
+          observer.next(data);
+      });
+      return () => {this.socket.disconnect();}
+  });
+
+  return observable;
+}
+
+  //  public getMessages = () => {
+  //   return Observable.create((observer) => {
+  //       this.socket.on('new-message', (message) => {
+  //           observer.next(message);
+  //       });
+  //   });
+}
+
 
