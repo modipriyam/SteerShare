@@ -34,7 +34,6 @@ export class PersonalHomeComponent implements OnInit {
 
   ngOnInit() {
     if((this.currentUser = this.userService.currentUserValue)){
-      console.log("sending car request");
       this.carService.get(this.currentUser._id)
         .subscribe((car)=>{
           this.currentCar = car;

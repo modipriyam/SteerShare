@@ -4,11 +4,11 @@ import { Booking } from './../models/booking.model';
 import { BookingService } from './../services/booking.service';
 import { RideService } from './../services/ride.service';
 import { Post } from 'src/app/models/post.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 
-
+declare var paypal;
 
 
 @Component({
@@ -17,9 +17,17 @@ import { Http, Response, RequestOptions, Headers } from '@angular/http';
   styleUrls: ['./confirmbooking.component.scss']
 })
 export class ConfirmbookingComponent implements OnInit {
+  @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
   post: Post;
   booking: Booking = new Booking();
 
+  product = {
+    price: 777.77,
+    description: 'used couch, decent condition',
+    img: 'assets/couch.jpg'
+  };
+
+  paidFor = false;
 
 
   currentUser: User;
@@ -46,6 +54,32 @@ export class ConfirmbookingComponent implements OnInit {
     const element = document.getElementById('date') as HTMLInputElement;
     // element.valueAsNumber =
     // Date.now() - new Date().getTimezoneOffset() * 60000;
+
+    paypal
+    .Buttons({
+      createOrder: (data, actions) => {
+        return actions.order.create({
+          purchase_units: [
+            {
+              description: this.product.description,
+              amount: {
+                currency_code: 'USD',
+                value: this.post.price
+              }
+            }
+          ]
+        });
+      },
+      onApprove: async (data, actions) => {
+        const order = await actions.order.capture();
+        this.paidFor = true;
+        console.log(order);
+      },
+      onError: err => {
+        console.log(err);
+      }
+    })
+    .render(this.paypalElement.nativeElement);
 
 
   }
