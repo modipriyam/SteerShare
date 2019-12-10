@@ -78,8 +78,17 @@
                 </div>
 
                      <div> <label class="">
-                        Vehicle
+                        Vehicle: 
                     </label>
+                    <div *ngIf="currentCar">
+                        Brand: {{currentCar.brand}}
+                        Model: {{currentCar.model}}
+                        Color: {{currentCar.color}}
+                        Plate Number: {{currentCar.plate}}
+                    </div>
+                    <div *ngIf="!currentCar">
+                        <a routerLink="/car">Register Your Car</a>
+                    </div>
                     <!-- <select class="form-control" >
                       <option  value=  ></option>
                       </select> -->

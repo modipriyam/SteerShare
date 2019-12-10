@@ -8,7 +8,6 @@ let Ride = new Schema({
         type: String,
         
     },
-    
     from: {
         type: String,
         required: "from is required"
