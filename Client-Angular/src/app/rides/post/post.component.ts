@@ -55,6 +55,11 @@ export class PostComponent implements OnInit {
     this.RideService.add(this.post).subscribe();
     window.location.reload();
   }
+
+
+
+
+
   getAddress(place: object) {
     this.address = place['formatted_address'];
     this.phone = this.getPhone(place);

@@ -6,7 +6,14 @@ const Ride = mongoose.model('Ride');
 
 exports.save = function(params){
    
-    const newRide = new Post(ride);
+    const newRide = new Ride(ride);
+    const promise = newRide.save();
+    
+    return promise;
+}
+
+exports.saveRide = function(ride){
+    const newRide = new Ride(ride);
     const promise = newRide.save();
     
     return promise;

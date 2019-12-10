@@ -25,10 +25,7 @@ let Ride = new Schema({
         type: String,
         required: "Start time is required"
     },
-    seats: {
-        type: String,
-        required: "seats is required"
-    },
+   
     price:{
         type: String,
         required: "price is required"
