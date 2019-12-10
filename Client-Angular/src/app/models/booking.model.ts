@@ -1,4 +1,5 @@
 export class Booking {
+  _id: string;
   username: string;
   userid: string;
   from: string;
