@@ -17,6 +17,9 @@ import { Booking } from 'src/app/models/booking.model';
 export class PersonalHomeComponent implements OnInit {
   currentUser: User;
   currentCar: Car;
+  userRides: Array<Booking>;
+  upcomingRides: Array<Booking>;
+  historyRides: Array<Booking>;
   booking: Booking;
   bookings: Array<Booking>;
 
@@ -26,19 +29,24 @@ export class PersonalHomeComponent implements OnInit {
     private bookingService: BookingService,
     private router: Router,
     private route: ActivatedRoute,
+    private rideService: RideService,
   ) { }
 
   ngOnInit() {
     if((this.currentUser = this.userService.currentUserValue)){
-      console.log("sending car request");
       this.carService.get(this.currentUser._id)
         .subscribe((car)=>{
           this.currentCar = car;
+          this.bookingService.getUserRides(this.currentUser.username).subscribe((rides) => {
+            this.userRides = rides;
+
+          })
         })
     }
     else{
       this.router.navigate(['/login'], {queryParams: {returnUrl: this.router.url}});
     }
+
   }
 
   //  viewRides(event: Event){

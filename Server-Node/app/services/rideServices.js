@@ -19,10 +19,16 @@ exports.saveRide = function(ride){
     return promise;
 }
 
-
-
 exports.get = function(username){
     const promise = Ride.findById(id).exec();
+    return promise;
+}
+
+exports.searchUserRides = function(username){
+    const promise = Ride.find({
+        username: {$eq: username}
+    }).exec();
+
     return promise;
 }
 

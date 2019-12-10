@@ -42,6 +42,17 @@ exports.list = function(req, res){
         .catch(renderErrorResponse(res));
 }
 
+exports.getUserRides = function(req, res){
+    const resolve = (rides) => {
+        res.status(200);
+        res.json(rides);
+    }
+
+    rideServices.searchUserRides(req.params.username)
+        .then(resolve)
+        .catch(renderErrorResponse(res));
+}
+
 
 let renderErrorResponse = (response) => {
     const errorCallback = (error) => {
