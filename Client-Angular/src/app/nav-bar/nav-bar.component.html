@@ -15,7 +15,7 @@
           <nav class="nav">
             <a href = # *ngIf="loggedin" class="nav-link" routerLink="personal_home"><i class="ion-md-person"></i>&nbsp;View Profile</a>
 
-            <a href = # *ngIf="loggedin" (click)="this.userService.logout()" class="nav-link"><i class="ion-md-power"></i>&nbsp;{{this.currentUser.username}}(LogOut)</a>
+            <a routerLink="" *ngIf="loggedin" (click)="this.userService.logout()" class="nav-link"><i class="ion-md-power"></i>&nbsp;Logout</a>
           </nav>
         </div><!-- dropdown-menu -->
       </div><!-- dropdown -->
@@ -26,11 +26,18 @@
 <div class="slim-navbar">
   <div class="container">
     <ul class="nav">
-      <li class="nav-item active">
-        <a class="nav-link" *ngIf="!loggedin" routerLink="login">
+      <li class="nav-item " *ngIf="!loggedin">
+        <a class="nav-link" routerLink="login">
           <i class="ion-md-home"></i>
           &nbsp;
           <span>Login</span>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="loggedin">
+        <a class="nav-link" routerLink="">
+          <i class="ion-md-home"></i>
+          &nbsp;
+          <span>Home</span>
         </a>
       </li>
       <li class="nav-item">

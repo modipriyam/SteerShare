@@ -2,8 +2,8 @@
 
 <h2>Your upcoming rides</h2>
 
-<h2>Your finished transactions</h2>
-
+<h2>Your finished transactions:</h2>
+<button type="submit" (click)="viewRides($event)" class="btn btn-success">View Rides</button>
 <h2>Your car</h2>
 <div *ngIf="currentCar">
     Brand: {{currentCar.brand}}

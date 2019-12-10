@@ -9,6 +9,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 
 
+
+
 @Component({
   selector: 'app-confirmbooking',
   templateUrl: './confirmbooking.component.html',
@@ -17,26 +19,20 @@ import { Http, Response, RequestOptions, Headers } from '@angular/http';
 export class ConfirmbookingComponent implements OnInit {
   post: Post;
   booking: Booking = new Booking();
-  username: string;
-  from: string;
-  to: string;
-  travel_date: string;
-  travel_time: string;
-  price: string;
-  description: string;
-  email: string;
+
+
 
   currentUser: User;
 
-currentDate: string;
-hours: string;
+  currentDate: string;
+  hours: string;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private RideService: RideService,
-              private userService: UserService,
-              private BookingService: BookingService,
-              private http: Http) { }
+    private router: Router,
+    private RideService: RideService,
+    private userService: UserService,
+    private BookingService: BookingService,
+    private http: Http) { }
 
   ngOnInit() {
 
@@ -48,11 +44,11 @@ hours: string;
     let date = new Date();
     this.hours = date.getHours().toLocaleString();
     const element = document.getElementById('date') as HTMLInputElement;
-   // element.valueAsNumber =
-     // Date.now() - new Date().getTimezoneOffset() * 60000;
+    // element.valueAsNumber =
+    // Date.now() - new Date().getTimezoneOffset() * 60000;
 
 
-}
+  }
 
   confirmBooking(event: Event) {
     let user = {
@@ -78,19 +74,29 @@ hours: string;
 
       }
     )
-      this.booking.email=(document.getElementById('email') as HTMLInputElement).value,
-      this.booking.from=this.post.from
-      this.booking.to=this.post.to
-      this.booking.price=this.post.price
-      this.booking.travel_date=this.post.travel_date
-      this.booking.travel_time=this.post.travel_time
-      console.log(this.booking.from);
+    this.booking.email = (document.getElementById('email') as HTMLInputElement).value,
+      this.booking.from = this.post.from
+    this.booking.to = this.post.to
+    this.booking.price = this.post.price
+    this.booking.travel_date = this.post.travel_date
+    this.booking.travel_time = this.post.travel_time
+    console.log(this.booking.from);
+    this.booking.driversusername=this.post.username;
 
-      if((this.currentUser = this.userService.currentUserValue)){
-        console.log(this.currentUser.username);
-        this.booking.username=this.currentUser.username;
-    }
+    console.log(this.booking.driversusername);
+
+    // tslint:disable-next-line: no-conditional-assignment
+    if ((this.currentUser = this.userService.currentUserValue)) {
+      console.log(this.currentUser.username);
+      this.booking.username = this.currentUser.username;
+      console.log(this.currentUser._id);
+      if(typeof this.currentUser._id === "string"){
+        console.log("id is a string");
+      }
+      this.booking.userid=this.currentUser._id;
       this.BookingService.add(this.booking).subscribe();
+    }
+
 
 
   }

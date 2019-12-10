@@ -37,7 +37,13 @@
               "src/app/static/lib/bootstrap/js/bootstrap.js",
               "src/app/static/js/slim.js",
               "src/app/static/lib/popper.js/js/popper.js",
-              "src/app/static/lib/jquery/js/jquery.js"
+              "src/app/static/lib/jquery/js/jquery.js",
+              "src/app/static/lib/jquery.cookie/js/jquery.cookie.js",
+              "src/app/static/lib/jquery-toggles/js/toggles.min.js",
+              "src/app/static/lib/jt.timepicker/js/jquery.timepicker.js",
+              "src/app/static/lib/spectrum/js/spectrum.js",
+              "src/app/static/lib/jquery.maskedinput/js/jquery.maskedinput.js",
+              "src/app/static/lib/bootstrap-tagsinput/js/bootstrap-tagsinput.js"
             ]
           },
           "configurations": {
