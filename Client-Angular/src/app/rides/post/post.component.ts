@@ -4,14 +4,10 @@ import { UserService } from '../../services/user.service';
 import { post } from 'selenium-webdriver/http';
 import { Post } from 'src/app/models/post.model';
 
-<<<<<<< HEAD
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { Car } from 'src/app/models/car.model';
-=======
-import { Component, OnInit, NgZone } from '@angular/core';
->>>>>>> Integration
 
 @Component({
   selector: 'app-post',
