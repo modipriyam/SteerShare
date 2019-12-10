@@ -90,8 +90,8 @@ async function sendMail(user, callback){
         port: 587,
         secure: false,
         auth: {
-            user: '', //ENTER YOUR EMAIL
-            pass: '' //ENTER YOUR PASSWORD
+            user: 'virajrajopadhye@gmail.com', //ENTER YOUR EMAIL
+            pass: 'v!Zz2812' //ENTER YOUR PASSWORD
         }
 
     });
