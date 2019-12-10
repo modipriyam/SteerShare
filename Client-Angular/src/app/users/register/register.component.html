@@ -4,8 +4,8 @@
   <div class="signin-right">
 
     <div class="signin-box">
-      <h2 class="signin-title-primary">Welcome back!</h2>
-      <h3 class="signin-title-secondary">Sign in to continue.</h3>
+      <h2 class="signin-title-primary">Welcome!</h2>
+      <h3 class="signin-title-secondary">Sign Up to continue.</h3>
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="First Name" formControlName="firstName">
@@ -20,9 +20,10 @@
         <input type="password" class="form-control" placeholder="Enter your password" formControlName="password">
       </div><!-- form-group -->
       <div class="form-group">
-      <div class="custom-file">
-        <input type="file" class="custom-file-input" id="profileImg" formControlName="profileImage">
-        <label class="custom-file-label custom-file-label-primary" for="customFile">Choose file</label>
+      <div class="">
+          <label for="profileImg" >Upload Profile Pic</label>&nbsp;&nbsp;&nbsp;
+        <input type="file"  id="profileImg" formControlName="profileImage" accept="image/png, image/jpeg">
+       
       </div><!-- custom-file -->
       </div>
       <button class="btn btn-primary btn-block btn-signin" [disabled]="registerForm.invalid">Register</button>

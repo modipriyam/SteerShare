@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/login']);
         },
         error => {
-          window.alert(error);
+          window.alert('Issue with field Validations');
         }
       )
   }
