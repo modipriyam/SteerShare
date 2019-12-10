@@ -108,6 +108,9 @@ export class ConfirmbookingComponent implements OnInit {
 
       }
     )
+
+
+
     this.booking.email = (document.getElementById('email') as HTMLInputElement).value,
       this.booking.from = this.post.from
     this.booking.to = this.post.to
@@ -115,21 +118,40 @@ export class ConfirmbookingComponent implements OnInit {
     this.booking.travel_date = this.post.travel_date
     this.booking.travel_time = this.post.travel_time
     console.log(this.booking.from);
-    this.booking.driversusername=this.post.username;
+    this.booking.driversusername = this.post.username;
 
     console.log(this.booking.driversusername);
 
-    // tslint:disable-next-line: no-conditional-assignment
-    if ((this.currentUser = this.userService.currentUserValue)) {
-      console.log(this.currentUser.username);
-      this.booking.username = this.currentUser.username;
-      console.log(this.currentUser._id);
-      if(typeof this.currentUser._id === "string"){
-        console.log("id is a string");
-      }
-      this.booking.userid=this.currentUser._id;
-      this.BookingService.add(this.booking).subscribe();
+    function validateEmail(email) {
+      // tslint:disable-next-line: max-line-length
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
     }
+
+
+    // tslint:disable-next-line: no-conditional-assignment
+
+    if (validateEmail(this.booking.email)) {
+      console.log('email is valid')
+      if ((this.currentUser = this.userService.currentUserValue)) {
+        console.log(this.currentUser.username);
+        this.booking.username = this.currentUser.username;
+        console.log(this.currentUser._id);
+        if (typeof this.currentUser._id === "string") {
+          console.log("id is a string");
+        }
+        this.booking.userid = this.currentUser._id;
+        this.BookingService.add(this.booking).subscribe();
+      }
+    }
+    else {
+      console.log('email is invalid');
+      window.alert('Enter valid email');
+    }
+
+
+
+
 
 
 
