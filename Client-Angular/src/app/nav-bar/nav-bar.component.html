@@ -4,18 +4,21 @@
     <div class="slim-header-left">
       <h2 class="slim-logo" id= "italic"><a href="index-2.html">SteerShare<span>.</span></a></h2>
     </div><!-- slim-header-left -->
-    <div class="slim-header-right">
+    <div class="slim-header-right" *ngIf="!loggedin">
+      <a href=# class="nav-link" routerLink="login"><i class="ion-md-person"></i>&nbsp;Login</a>
+    </div>
+    <div class="slim-header-right" *ngIf="loggedin">
       <div class="dropdown dropdown-c">
-        <a href=# *ngIf="loggedin" class="logged-user" data-toggle="dropdown">
+        <a class="logged-user" data-toggle="dropdown">
           <img src="http://localhost:3000/users/profileImg/{{currentUser.profileImgName}}" alt="">
-          <span><a href ="#" *ngIf="loggedin" >{{this.currentUser.username}}</a></span>&nbsp;
+          <span><a>{{this.currentUser.username}}</a></span>&nbsp;
           <i class="fa fa-angle-down"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right">
           <nav class="nav">
-            <a href = # *ngIf="loggedin" class="nav-link" routerLink="personal_home"><i class="ion-md-person"></i>&nbsp;View Profile</a>
+            <a href = #  class="nav-link" routerLink="personal_home"><i class="ion-md-person"></i>&nbsp;View Profile</a>
 
-            <a routerLink="" *ngIf="loggedin" (click)="this.userService.logout()" class="nav-link"><i class="ion-md-power"></i>&nbsp;Logout</a>
+            <a routerLink="" (click)="this.userService.logout()" class="nav-link"><i class="ion-md-power"></i>&nbsp;Logout</a>
           </nav>
         </div><!-- dropdown-menu -->
       </div><!-- dropdown -->
@@ -26,14 +29,7 @@
 <div class="slim-navbar">
   <div class="container">
     <ul class="nav">
-      <li class="nav-item " *ngIf="!loggedin">
-        <a class="nav-link" routerLink="login">
-          <i class="ion-md-home"></i>
-          &nbsp;
-          <span>Login</span>
-        </a>
-      </li>
-      <li class="nav-item" *ngIf="loggedin">
+      <li class="nav-item">
         <a class="nav-link" routerLink="">
           <i class="ion-md-home"></i>
           &nbsp;
@@ -41,7 +37,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="ifLoggedIn($event)">
+        <a class="nav-link" (click)="ifLoggedIn($event)" routerLink="post">
           <i class="ion-md-paper-plane"></i>
           &nbsp;
           <span>Post Ride</span>
