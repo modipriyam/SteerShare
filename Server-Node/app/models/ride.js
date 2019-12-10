@@ -37,7 +37,12 @@ let Ride = new Schema({
 
     email:{
         type: String
-    }
+    },
+
+    userid:{
+        type: String,
+        required:"userid is required"
+    },
 
 }, {
     versionKey: false

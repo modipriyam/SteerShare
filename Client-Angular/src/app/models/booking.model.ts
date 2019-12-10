@@ -1,5 +1,6 @@
 export class Booking {
   username: string;
+  userid: string;
   from: string;
   to: string;
   travel_date: string;

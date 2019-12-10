@@ -83,8 +83,14 @@ export class ConfirmbookingComponent implements OnInit {
     if ((this.currentUser = this.userService.currentUserValue)) {
       console.log(this.currentUser.username);
       this.booking.username = this.currentUser.username;
+      console.log(this.currentUser._id);
+      if(typeof this.currentUser._id === "string"){
+        console.log("id is a string");
+      }
+      this.booking.userid=this.currentUser._id;
+      this.BookingService.add(this.booking).subscribe();
     }
-    this.BookingService.add(this.booking).subscribe();
+
 
 
   }
