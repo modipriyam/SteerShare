@@ -6,4 +6,5 @@ export class Post {
     seats: string;
     price: string;
     description: string;
+    username: string;
 }

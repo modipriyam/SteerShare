@@ -73,7 +73,7 @@ export class PostComponent implements OnInit {
     let to= this.formattedEstablishmentAddress;
     this.post.from=from;
     this.post.to=to;
-    console.log(this.post.from);
+    this.post.username = this.currentUser.username;
     console.log(this.post);
     this.RideService.add(this.post).subscribe();
     window.location.reload();
