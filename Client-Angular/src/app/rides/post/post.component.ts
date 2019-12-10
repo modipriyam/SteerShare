@@ -1,8 +1,13 @@
 import { RideService } from './../../services/ride.service';
+import { CarService } from '../../services/car.service';
+import { UserService } from '../../services/user.service';
 import { post } from 'selenium-webdriver/http';
 import { Post } from 'src/app/models/post.model';
 
 import { Component, OnInit, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
+import { Car } from 'src/app/models/car.model';
 
 @Component({
   selector: 'app-post',
@@ -10,6 +15,9 @@ import { Component, OnInit, NgZone } from '@angular/core';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
+  currentUser: User;
+  currentCar: Car;
+
   currentDate: string;
   hours: string;
 
@@ -29,10 +37,25 @@ export class PostComponent implements OnInit {
 
 
 
-
-  constructor(private RideService: RideService, public zone: NgZone) { }
+  constructor(
+    private RideService: RideService,
+    private UserService: UserService,
+    private CarService: CarService,
+    private router: Router,
+    public zone: NgZone
+    ) { }
 
   ngOnInit() {
+    if((this.currentUser = this.UserService.currentUserValue)){
+      this.CarService.get(this.currentUser._id)
+        .subscribe((car)=>{
+          this.currentCar = car;
+        });
+    }
+    else{
+      this.router.navigate(['/login'], {queryParams: {returnUrl: this.router.url}});
+    }
+
 
     this.currentDate = new Date().toISOString().split('T')[0];
     let date = new Date();
@@ -40,7 +63,13 @@ export class PostComponent implements OnInit {
     const element = document.getElementById('date') as HTMLInputElement;
     element.valueAsNumber =
       Date.now() - new Date().getTimezoneOffset() * 60000;
+
+
+
+
+
   }
+
 
 
   addRide(event: Event) {
@@ -50,11 +79,32 @@ export class PostComponent implements OnInit {
     let to= this.formattedEstablishmentAddress;
     this.post.from=from;
     this.post.to=to;
-    console.log(this.post.from);
+    this.post.username = this.currentUser.username;
     console.log(this.post);
-    this.RideService.add(this.post).subscribe();
+
+
+    function validatePrice(price) {
+      // tslint:disable-next-line: max-line-length
+      var re = /^\d*[1-9]+\d*$/;
+      return re.test(String(price).toLowerCase());
+    }
+
+    if(validatePrice(this.post.price)){
+      this.RideService.add(this.post).subscribe();
+      window.alert('Ride has been posted');
     window.location.reload();
-  }
+    }
+    else{
+      window.alert('invalid price')
+    }
+
+
+    }
+
+
+
+
+
 
 
 

@@ -1,5 +1,7 @@
 export class Booking {
+  _id: string;
   username: string;
+  userid: string;
   from: string;
   to: string;
   travel_date: string;
@@ -7,4 +9,5 @@ export class Booking {
   price: string;
   description: string;
   email: string;
+  driversusername: string;
 }

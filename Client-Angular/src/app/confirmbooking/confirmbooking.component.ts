@@ -4,9 +4,11 @@ import { Booking } from './../models/booking.model';
 import { BookingService } from './../services/booking.service';
 import { RideService } from './../services/ride.service';
 import { Post } from 'src/app/models/post.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
+
+declare var paypal;
 
 
 @Component({
@@ -15,28 +17,30 @@ import { Http, Response, RequestOptions, Headers } from '@angular/http';
   styleUrls: ['./confirmbooking.component.scss']
 })
 export class ConfirmbookingComponent implements OnInit {
+  @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
   post: Post;
   booking: Booking = new Booking();
-  username: string;
-  from: string;
-  to: string;
-  travel_date: string;
-  travel_time: string;
-  price: string;
-  description: string;
-  email: string;
+
+  product = {
+    price: 777.77,
+    description: 'used couch, decent condition',
+    img: 'assets/couch.jpg'
+  };
+
+  paidFor = false;
+
 
   currentUser: User;
 
-currentDate: string;
-hours: string;
+  currentDate: string;
+  hours: string;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private RideService: RideService,
-              private userService: UserService,
-              private BookingService: BookingService,
-              private http: Http) { }
+    private router: Router,
+    private RideService: RideService,
+    private userService: UserService,
+    private BookingService: BookingService,
+    private http: Http) { }
 
   ngOnInit() {
 
@@ -48,11 +52,37 @@ hours: string;
     let date = new Date();
     this.hours = date.getHours().toLocaleString();
     const element = document.getElementById('date') as HTMLInputElement;
-   // element.valueAsNumber =
-     // Date.now() - new Date().getTimezoneOffset() * 60000;
+    // element.valueAsNumber =
+    // Date.now() - new Date().getTimezoneOffset() * 60000;
+
+    paypal
+    .Buttons({
+      createOrder: (data, actions) => {
+        return actions.order.create({
+          purchase_units: [
+            {
+              description: this.product.description,
+              amount: {
+                currency_code: 'USD',
+                value: this.post.price
+              }
+            }
+          ]
+        });
+      },
+      onApprove: async (data, actions) => {
+        const order = await actions.order.capture();
+        this.paidFor = true;
+        console.log(order);
+      },
+      onError: err => {
+        console.log(err);
+      }
+    })
+    .render(this.paypalElement.nativeElement);
 
 
-}
+  }
 
   confirmBooking(event: Event) {
     let user = {
@@ -78,19 +108,51 @@ hours: string;
 
       }
     )
-      this.booking.email=(document.getElementById('email') as HTMLInputElement).value,
-      this.booking.from=this.post.from
-      this.booking.to=this.post.to
-      this.booking.price=this.post.price
-      this.booking.travel_date=this.post.travel_date
-      this.booking.travel_time=this.post.travel_time
-      console.log(this.booking.from);
 
-      if((this.currentUser = this.userService.currentUserValue)){
-        console.log(this.currentUser.username);
-        this.booking.username=this.currentUser.username;
+
+
+    this.booking.email = (document.getElementById('email') as HTMLInputElement).value,
+      this.booking.from = this.post.from
+    this.booking.to = this.post.to
+    this.booking.price = this.post.price
+    this.booking.travel_date = this.post.travel_date
+    this.booking.travel_time = this.post.travel_time
+    console.log(this.booking.from);
+    this.booking.driversusername = this.post.username;
+
+    console.log(this.booking.driversusername);
+
+    function validateEmail(email) {
+      // tslint:disable-next-line: max-line-length
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
     }
-      this.BookingService.add(this.booking).subscribe();
+
+
+    // tslint:disable-next-line: no-conditional-assignment
+
+    if (validateEmail(this.booking.email)) {
+      console.log('email is valid')
+      if ((this.currentUser = this.userService.currentUserValue)) {
+        console.log(this.currentUser.username);
+        this.booking.username = this.currentUser.username;
+        console.log(this.currentUser._id);
+        if (typeof this.currentUser._id === "string") {
+          console.log("id is a string");
+        }
+        this.booking.userid = this.currentUser._id;
+        this.BookingService.add(this.booking).subscribe();
+      }
+    }
+    else {
+      console.log('email is invalid');
+      window.alert('Enter valid email');
+    }
+
+
+
+
+
 
 
   }
