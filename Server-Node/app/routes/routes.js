@@ -37,7 +37,7 @@ module.exports = function(app){
         .get(carController.get);
 
     app.route('/rides')
-        .get(rideController.get);
+        .post(rideController.add);
     
     app.route('/rides/:id')
         .get(rideController.get);

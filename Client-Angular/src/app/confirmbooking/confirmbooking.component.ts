@@ -1,9 +1,13 @@
+import { UserService } from './../services/user.service';
+import { User } from './../models/user.model';
+import { Booking } from './../models/booking.model';
+import { BookingService } from './../services/booking.service';
 import { RideService } from './../services/ride.service';
 import { Post } from 'src/app/models/post.model';
-
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
+
 
 @Component({
   selector: 'app-confirmbooking',
@@ -12,10 +16,26 @@ import { Http, Response, RequestOptions, Headers } from '@angular/http';
 })
 export class ConfirmbookingComponent implements OnInit {
   post: Post;
+  booking: Booking = new Booking();
+  username: string;
+  from: string;
+  to: string;
+  travel_date: string;
+  travel_time: string;
+  price: string;
+  description: string;
+  email: string;
+
+  currentUser: User;
+
+currentDate: string;
+hours: string;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private RideService: RideService,
+              private userService: UserService,
+              private BookingService: BookingService,
               private http: Http) { }
 
   ngOnInit() {
@@ -24,7 +44,15 @@ export class ConfirmbookingComponent implements OnInit {
     console.log(id);
     this.RideService.view(id).subscribe(newPost => { this.post = newPost; });
 
-  }
+    this.currentDate = new Date().toISOString().split('T')[0];
+    let date = new Date();
+    this.hours = date.getHours().toLocaleString();
+    const element = document.getElementById('date') as HTMLInputElement;
+   // element.valueAsNumber =
+     // Date.now() - new Date().getTimezoneOffset() * 60000;
+
+
+}
 
   confirmBooking(event: Event) {
     let user = {
@@ -35,9 +63,10 @@ export class ConfirmbookingComponent implements OnInit {
       time: this.post.travel_time,
       price: this.post.price,
       desc: this.post.description
-
-
     }
+
+
+
     console.log(user.email);
     this.RideService.sendEmail('http://localhost:3000/sendmail', user).subscribe(
       data => {
@@ -49,7 +78,19 @@ export class ConfirmbookingComponent implements OnInit {
 
       }
     )
+      this.booking.email=(document.getElementById('email') as HTMLInputElement).value,
+      this.booking.from=this.post.from
+      this.booking.to=this.post.to
+      this.booking.price=this.post.price
+      this.booking.travel_date=this.post.travel_date
+      this.booking.travel_time=this.post.travel_time
+      console.log(this.booking.from);
 
+      if((this.currentUser = this.userService.currentUserValue)){
+        console.log(this.currentUser.username);
+        this.booking.username=this.currentUser.username;
+    }
+      this.BookingService.add(this.booking).subscribe();
 
 
   }

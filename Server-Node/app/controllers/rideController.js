@@ -4,7 +4,7 @@
 const rideServices = require('../services/rideServices');
 
 //Create and return a new ride in JSON based on the HTTP request
-exports.ride = function(req, res){
+exports.add = function(req, res){
     const newRide = Object.assign({}, req.body);
     const resolve = (ride) => {
         res.status(200);
@@ -40,3 +40,15 @@ exports.list = function(req, res){
         .then(resolve)
         .catch(renderErrorResponse(res));
 }
+
+let renderErrorResponse = (response) => {
+    const errorCallback = (error) => {
+        if (error) {
+            response.status(500);
+            response.json({
+                message: error.message
+            });
+        }
+    }
+    return errorCallback;
+};
