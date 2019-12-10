@@ -23,25 +23,56 @@ let express = require('express'),
 
 
 //Chatting Socket
-users = [];
-io.on('connection', (socket)=> {
-  console.log('user connected');
-  socket.on('setUsername', function(data) {
-    console.log(data);
+// users = [];
+// io.on('connection', (socket)=> {
+//   console.log('user connected');
+//   socket.on('setUsername', function(data) {
+//     console.log(data);
     
-    if(users.indexOf(data) > -1) {
-       socket.emit('userExists', data + ' username is taken! Try some other username.');
-    } else {
-       users.push(data);
-       socket.emit('userSet', {username: data});
-    }
- });
+//     if(users.indexOf(data) > -1) {
+//        socket.emit('userExists', data + ' username is taken! Try some other username.');
+//     } else {
+//        users.push(data);
+//        socket.emit('userSet', {username: data});
+//     }
+//  });
  
- socket.on('msg', function(data) {
-    //Send message to everyone
-    io.sockets.emit('newmsg', data);
- })
+//  socket.on('msg', function(data) {
+//     //Send message to everyone
+//     io.sockets.emit('newmsg', data);
+//  })
+// });
+
+io.on('connection',(socket)=>{
+
+  console.log('new connection made.');
+
+
+  socket.on('join', function(data){
+    //joining
+    socket.join(data.room);
+
+    console.log(data.user + 'joined the room : ' + data.room);
+
+    socket.broadcast.to(data.room).emit('new user joined', {user:data.user, message:'has joined this room.'});
+  });
+
+
+  socket.on('leave', function(data){
+  
+    console.log(data.user + 'left the room : ' + data.room);
+
+    socket.broadcast.to(data.room).emit('left room', {user:data.user, message:'has left this room.'});
+
+    socket.leave(data.room);
+  });
+
+  socket.on('message',function(data){
+
+    io.in(data.room).emit('new message', {user:data.user, message:data.message});
+  })
 });
+
 
 //Connect to local MongoDB collection
 mongoose.connect(config.connection, {
