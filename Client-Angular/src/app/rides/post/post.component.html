@@ -90,6 +90,18 @@
               </select>
             </div>
           </div>
+          <div class="row mg-t-20" *ngIf="!currentCar">
+            <label class="col-sm-4 form-control-label">Vehicle: <span class="tx-danger">*</span></label>
+              <div class="col-sm-8 mg-t-10 mg-sm-t-0" >
+                <a routerLink="/car">Register Your Car</a>
+              </div>
+            <div class="col-sm-8 mg-t-10 mg-sm-t-0" *ngIf="currentCar">
+              <label class="col-sm-4 form-control-label">Brand: {{currentCar.brand}}</label>
+              <label class="col-sm-4 form-control-label">Model: {{currentCar.model}}</label>
+              <label class="col-sm-4 form-control-label">Color: {{currentCar.color}}</label>
+              <label class="col-sm-4 form-control-label">Plate Number: {{currentCar.plate}}</label>
+            </div>
+          </div>
           <div class="row mg-t-20">
             <label class="col-sm-4 form-control-label">Price: <span class="tx-danger">*</span></label>
             <div class="col-sm-8 mg-t-10 mg-sm-t-0">
@@ -99,7 +111,7 @@
           <div class="row mg-t-20">
             <label class="col-sm-4 form-control-label">Additional Description: <span class="tx-danger"></span></label>
             <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" placeholder="Keep Passenger in Loop">
             </div>
           </div>
           <div class="form-layout-footer mg-t-30">
