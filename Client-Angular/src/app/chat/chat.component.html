@@ -15,7 +15,7 @@
             <div class="col-md-6 offset-md-3 col-sm-12">
                 <h1 class="text-center">
                     Chat with your SteerMate
-                    <button id="clear" class="btn btn-danger">Clear</button>
+                    <!-- <button id="clear" class="btn btn-danger">Clear</button> -->
                 </h1>
 
                 <div class="col-sm-5">
@@ -29,9 +29,9 @@
                 <div class="col-sm-5">
                     <label for="roomInput">Choose room</label>
                     <select name="roomInput" id="roomInput" class="form-control" [(ngModel)]="room">
-                        <option value="Lobby">Lobby</option>
-                        <option value="Hall">Hall</option>
-                        <option value="Deluxe">Deluxe</option>
+                        <option value="User1">User1</option>
+                        <option value="User2">User2</option>
+                        <option value="User3">User3</option>
                     </select>
                 </div>
                 <div class="col sm-2">
@@ -40,6 +40,8 @@
                         <button type="button" class="btn btn-default" (click)="leave()">Leave</button>
                     </div>
                 </div>
+                <br>
+                <br>
 
                 <div class="row">
                     <div class="well" style="height:200px; padding:15px;">
@@ -57,5 +59,4 @@
                 </div>
             </div>
         </div>
-    </div>
 
