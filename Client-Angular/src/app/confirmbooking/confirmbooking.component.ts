@@ -21,12 +21,6 @@ export class ConfirmbookingComponent implements OnInit {
   post: Post;
   booking: Booking = new Booking();
 
-  product = {
-    price: 777.77,
-    description: 'used couch, decent condition',
-    img: 'assets/couch.jpg'
-  };
-
   paidFor = false;
 
 
@@ -61,7 +55,7 @@ export class ConfirmbookingComponent implements OnInit {
         return actions.order.create({
           purchase_units: [
             {
-              description: this.product.description,
+              description: "Your SteerShare Ride from " + this.post.from + " to " + this.post.to,
               amount: {
                 currency_code: 'USD',
                 value: this.post.price
@@ -73,7 +67,7 @@ export class ConfirmbookingComponent implements OnInit {
       onApprove: async (data, actions) => {
         const order = await actions.order.capture();
         this.paidFor = true;
-        console.log(order);
+        this.confirmBooking(null);
       },
       onError: err => {
         console.log(err);
