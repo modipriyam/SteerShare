@@ -28,6 +28,11 @@ export class BookingService {
     return rides$;
   }
 
+  public getUserPosts(username: string): Observable<Array<Booking>> {
+    const posts$ = this.http.get<Array<Booking>>(`${environment.serverBaseURL}/posts/user/` + username);
+    return posts$;
+  }
+
   public doNothing(){
 
   }

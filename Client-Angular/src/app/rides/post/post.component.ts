@@ -1,7 +1,6 @@
 import { RideService } from './../../services/ride.service';
 import { CarService } from '../../services/car.service';
 import { UserService } from '../../services/user.service';
-import { post } from 'selenium-webdriver/http';
 import { Post } from 'src/app/models/post.model';
 
 import { Component, OnInit, NgZone } from '@angular/core';
@@ -91,8 +90,8 @@ export class PostComponent implements OnInit {
 
     if(validatePrice(this.post.price)){
       this.RideService.add(this.post).subscribe();
-      window.alert('Ride has been posted');
-    //window.location.reload();
+      window.alert('Ride has been posted'); 
+      this.router.navigateByUrl('search');
     }
     else{
       window.alert('invalid price')

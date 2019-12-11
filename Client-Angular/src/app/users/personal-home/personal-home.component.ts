@@ -18,6 +18,7 @@ export class PersonalHomeComponent implements OnInit {
   currentUser: User;
   currentCar: Car;
   userRides: Array<Booking>;
+  userPosts: Array<Booking>;
   upcomingRides: Array<Booking>;
   historyRides: Array<Booking>;
   booking: Booking;
@@ -40,8 +41,11 @@ export class PersonalHomeComponent implements OnInit {
           this.currentCar = car;
           this.bookingService.getUserRides(this.currentUser.username).subscribe((rides) => {
             this.userRides = rides;
-
-          })
+          });
+          this.bookingService.getUserPosts(this.currentUser.username).subscribe((posts) => {
+            this.userPosts = posts;
+            console.log(this.userPosts);
+          });
         })
     }
     else{

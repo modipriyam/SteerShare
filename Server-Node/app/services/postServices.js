@@ -50,6 +50,14 @@ exports.searchByLocation = function(params){
     return promise;
 };
 
+exports.searchUserPosts = function(username){
+    const promise = Post.find({
+        username: {$eq: username}
+    }).exec();
+
+    return promise;
+}
+
 /**Function for find post by id */
 exports.get = function(id){
     const promise = Post.findById(id).exec();
