@@ -41,10 +41,13 @@
           </div><!-- card-footer -->
         </div><!-- card -->
 
-        <div class="card card-latest-activity mg-t-20">
+        <div class="card card-experience mg-t-20">
           <div class="card-body">
             <div class="slim-card-title">Manage Rides</div>
-            <div class="media media-author" *ngFor="let ride of userRides">
+            <div class="media"  *ngFor="let ride of userRides">
+              <div class="experience-logo">
+                <i class="ion-md-switch"></i>
+              </div><!-- experience-logo -->
               <div class="media-body">
                 <h6><a>{{ride.from}} - {{ride.to}}</a></h6>
                 <p>Driver Details : {{ride.driversusername}}</p>
