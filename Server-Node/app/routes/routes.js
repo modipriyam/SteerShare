@@ -49,6 +49,15 @@ module.exports = function(app){
     app.route('/rides/user/:username')
         .get(rideController.getUserRides);
 
+    app.route('/chat')
+        .post(chatController.post);
+
+    app.route('/chat/:name')
+        .get(chatController.get);
+
+    app.route('/chat/:room')
+        .get(chatController.getroom);
+
   
     
 };
