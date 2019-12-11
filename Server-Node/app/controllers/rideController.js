@@ -65,3 +65,16 @@ let renderErrorResponse = (response) => {
     }
     return errorCallback;
 };
+
+
+exports.delete = function (request, response) {
+    const resolve = (todo) => {
+        response.status(200);
+        response.json({
+            message: 'ride Successfully deleted'
+        });
+    };
+    rideServices.delete(request.params.id)
+        .then(resolve)
+        .catch(renderErrorResponse(response));
+};

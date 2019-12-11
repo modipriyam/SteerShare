@@ -32,6 +32,11 @@ export class BookingService {
 
   }
 
+  public delete(id: string): Observable<Booking> {
+    const rides$ = this.http.delete<Booking>('http://localhost:3000/rides/'+id);
+    return rides$;
+  }
+
 
 
 }
