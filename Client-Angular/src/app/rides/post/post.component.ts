@@ -92,7 +92,7 @@ export class PostComponent implements OnInit {
     if(validatePrice(this.post.price)){
       this.RideService.add(this.post).subscribe();
       window.alert('Ride has been posted');
-    window.location.reload();
+    //window.location.reload();
     }
     else{
       window.alert('invalid price')

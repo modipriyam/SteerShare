@@ -40,10 +40,12 @@ module.exports = function(app){
     app.route('/rides')
         .post(rideController.add);
 
-      
-    
+    //  app.route('/rides:_id')
+    //     .delete(rideController.delete);
+
     app.route('/rides/:id')
-        .get(rideController.get);
+        .get(rideController.get)
+        .delete(rideController.delete);
 
     app.route('/rides/user/:username')
         .get(rideController.getUserRides);
