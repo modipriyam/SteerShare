@@ -28,13 +28,16 @@ let Post = new Schema({
         type: String,
         required: "price is required"
     },
-    description:{
-        type: String
-    },
+    
     username: {
         type: String, 
         required: "Driver usename is required"
-    }
+    },
+
+    description:{
+        type: String,
+        required: "description is required"
+    },
 
 }, {
     versionKey: false
