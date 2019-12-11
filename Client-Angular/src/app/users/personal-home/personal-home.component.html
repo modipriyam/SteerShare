@@ -36,9 +36,11 @@
             </div><!-- media -->
           </div><!-- card-body -->
           <div class="card-footer" *ngIf="currentCar">
-            <a >Show More Registered Cars <span class="d-none d-sm-inline"></span><i class="fa fa-angle-down"></i></a>
-            <a  *ngIf="currentCar" routerLink="/car">Update Car Details</a>
+            <a  *ngIf="currentCar" routerLink="/update-car">Update Car Details</a>
           </div><!-- card-footer -->
+          <div class="card-footer" *ngIf="!currentCar">
+              <a  *ngIf="!currentCar" routerLink="/car">Register Car</a>
+            </div><!-- card-footer -->
         </div><!-- card -->
 
         <div class="card card-experience mg-t-20">

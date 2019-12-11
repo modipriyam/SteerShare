@@ -20,6 +20,7 @@ import { ChatService   } from './services/chat.service';
 import { AutocompleteComponent } from './rides/search/google-places.component';
 import { CarComponent } from './users/car/car.component';
 import { FooterComponent } from './footer/footer.component';
+import { UpdateCarComponent } from './users/update-car/update-car.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { FooterComponent } from './footer/footer.component';
     ChatComponent,
     AutocompleteComponent,
     CarComponent,
+    UpdateCarComponent,
     FooterComponent
   ],
   imports: [

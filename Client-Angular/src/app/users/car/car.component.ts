@@ -12,6 +12,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./car.component.scss']
 })
 export class CarComponent implements OnInit {
+  submitted = false;
   currentUser: User;
   userCar: Car;
   carForm: FormGroup;
@@ -27,6 +28,7 @@ export class CarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    //Validation for the form
     this.carForm = this.formBuilder.group({
       brand: ['', Validators.required],
       model: ['', Validators.required],
@@ -34,6 +36,7 @@ export class CarComponent implements OnInit {
       plate: ['', [Validators.required, Validators.pattern('[A-Z0-9]{5,7}')]]
     });
 
+    //Check for the current user
     if((this.currentUser = this.userService.currentUserValue)){
 
     }
@@ -43,11 +46,15 @@ export class CarComponent implements OnInit {
     
   }
 
+  //Get form control
   get formControls(){
     return this.carForm.controls;
   }
 
+  //Submit functionality
   onSubmit(){
+    this.submitted = true;
+    if(this.carForm.invalid) return;
     this.carService.add(this.carForm.value, this.currentUser._id)
       .subscribe(
         data => {

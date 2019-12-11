@@ -12,6 +12,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./update-car.component.scss']
 })
 export class UpdateCarComponent implements OnInit {
+  submitted = false;
   currentUser: User;
   userCar: Car;
   carForm: FormGroup;
@@ -34,11 +35,11 @@ export class UpdateCarComponent implements OnInit {
       plate: ['', [Validators.required, Validators.pattern('[A-Z0-9]{5,7}')]]
     });
 
+    //Check for current user and their car information
     if((this.currentUser = this.userService.currentUserValue)){
       this.carService.get(this.currentUser._id)
       .subscribe((car)=>{
-        console.log("We are here");
-        console.log(car);
+
         this.userCar = car;
       })
     }
@@ -52,8 +53,10 @@ export class UpdateCarComponent implements OnInit {
     return this.carForm.controls;
   }
 
+  //Update form submit functionality
   onSubmit(){
-
+    this.submitted = true;
+    if(this.carForm.invalid) return;
     this.carService.update(this.carForm.value, this.currentUser._id)
       .subscribe(
         data => {
