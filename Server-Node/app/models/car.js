@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-//Create the data model
+//Create Car data model
 let Car = new Schema({
     brand: {
         type: String,

@@ -4,7 +4,7 @@ import { Booking } from './../models/booking.model';
 import { BookingService } from './../services/booking.service';
 import { RideService } from './../services/ride.service';
 import { Post } from 'src/app/models/post.model';
-import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 
@@ -38,6 +38,9 @@ export class ConfirmbookingComponent implements OnInit {
 
   ngOnInit() {
 
+
+
+
     let id = this.route.snapshot.paramMap.get('id');
     console.log(id);
     this.RideService.view(id).subscribe(newPost => { this.post = newPost; });
@@ -50,30 +53,30 @@ export class ConfirmbookingComponent implements OnInit {
     // Date.now() - new Date().getTimezoneOffset() * 60000;
 
     paypal
-    .Buttons({
-      createOrder: (data, actions) => {
-        return actions.order.create({
-          purchase_units: [
-            {
-              description: "Your SteerShare Ride from " + this.post.from + " to " + this.post.to,
-              amount: {
-                currency_code: 'USD',
-                value: this.post.price
+      .Buttons({
+        createOrder: (data, actions) => {
+          return actions.order.create({
+            purchase_units: [
+              {
+                description: "Your SteerShare Ride from " + this.post.from + " to " + this.post.to,
+                amount: {
+                  currency_code: 'USD',
+                  value: this.post.price
+                }
               }
-            }
-          ]
-        });
-      },
-      onApprove: async (data, actions) => {
-        const order = await actions.order.capture();
-        this.paidFor = true;
-        this.confirmBooking(null);
-      },
-      onError: err => {
-        console.log(err);
-      }
-    })
-    .render(this.paypalElement.nativeElement);
+            ]
+          });
+        },
+        onApprove: async (data, actions) => {
+          const order = await actions.order.capture();
+          this.paidFor = true;
+          this.confirmBooking(null);
+        },
+        onError: err => {
+          console.log(err);
+        }
+      })
+      .render(this.paypalElement.nativeElement);
 
 
   }
@@ -106,39 +109,38 @@ export class ConfirmbookingComponent implements OnInit {
 
 
     this.booking.email = this.userService.currentUserValue.username,
-      this.booking.from = this.post.from
-    this.booking.to = this.post.to
-    this.booking.price = this.post.price
-    this.booking.travel_date = this.post.travel_date
-    this.booking.travel_time = this.post.travel_time
+    this.booking.from = this.post.from;
+    this.booking.to = this.post.to;
+    this.booking.price = this.post.price;
+    this.booking.travel_date = this.post.travel_date;
+    this.booking.travel_time = this.post.travel_time;
     console.log(this.booking.from);
     this.booking.driversusername = this.post.username;
 
     console.log(this.booking.driversusername);
 
-    function validateEmail(email) {
-      // tslint:disable-next-line: max-line-length
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
-    }
+
+
 
 
     // tslint:disable-next-line: no-conditional-assignment
 
-      console.log('email is valid')
-      if ((this.currentUser = this.userService.currentUserValue)) {
-        console.log(this.currentUser.username);
-        this.booking.username = this.currentUser.username;
-        console.log(this.currentUser._id);
-        if (typeof this.currentUser._id === "string") {
-          console.log("id is a string");
-        }
-        this.booking.userid = this.currentUser._id;
-        this.BookingService.add(this.booking).subscribe();
+    console.log('email is valid')
+    // tslint:disable-next-line: no-conditional-assignment
+    if ((this.currentUser = this.userService.currentUserValue)) {
+      console.log(this.currentUser.username);
+      this.booking.username = this.currentUser.username;
+      console.log(this.currentUser._id);
+      if (typeof this.currentUser._id === "string") {
+        console.log("id is a string");
       }
+      this.booking.userid = this.currentUser._id;
+      this.BookingService.add(this.booking).subscribe();
+      //
+    }
 
 
-
+    this.router.navigate(['/personal_home']);
 
 
 

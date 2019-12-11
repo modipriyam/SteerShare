@@ -10,6 +10,8 @@ exports.saveRide = function(post){
     return promise;
 }
 
+/**Function of searching by Exact Date and Time */
+
 exports.searchByExactDateTime = function(params){
     const promise = Post.find({
         from: {$eq: params.from},
@@ -19,7 +21,7 @@ exports.searchByExactDateTime = function(params){
     return promise;
 };
 
-
+/**Function of searching by Location and Time */
 exports.searchByLocationAndTime = function(params){
     const promise = Post.find({
         $or : [
@@ -37,6 +39,8 @@ exports.searchByLocationAndTime = function(params){
     return promise;
 };
 
+/**Function of searching by Location */
+
 exports.searchByLocation = function(params){
     const promise = Post.find({
         from: {$eq: params.from},
@@ -46,7 +50,7 @@ exports.searchByLocation = function(params){
     return promise;
 };
 
-
+/**Function for find post by id */
 exports.get = function(id){
     const promise = Post.findById(id).exec();
     return promise;
