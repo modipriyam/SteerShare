@@ -12,6 +12,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./car.component.scss']
 })
 export class CarComponent implements OnInit {
+  submitted = false;
   currentUser: User;
   userCar: Car;
   carForm: FormGroup;
@@ -48,6 +49,8 @@ export class CarComponent implements OnInit {
   }
 
   onSubmit(){
+    this.submitted = true;
+    if(this.carForm.invalid) return;
     this.carService.add(this.carForm.value, this.currentUser._id)
       .subscribe(
         data => {
