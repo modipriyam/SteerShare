@@ -1,3 +1,5 @@
+/**Post Model */
+
 export class Post {
     from: string;
     to: string;

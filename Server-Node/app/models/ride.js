@@ -2,11 +2,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-//Create the data model
+//Create Ride data model
 let Ride = new Schema({
     username:{
         type: String,
-        required: "username is required"
+        required: "passengers username is required"
     },
     from: {
         type: String,

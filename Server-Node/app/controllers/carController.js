@@ -28,6 +28,18 @@ exports.get = function(req, res){
 
 };
 
+exports.update = function(req, res){
+    const newCar = Object.assign({}, req.body);
+    const resolve = (car) => {
+        res.status(200);
+        res.json(car);
+    };
+
+    carService.update(newCar)
+        .then(resolve)
+        .catch(renderErrorResponse(res));
+}
+
 
 //Throw error if error object is present
 let renderErrorResponse = (response) => {

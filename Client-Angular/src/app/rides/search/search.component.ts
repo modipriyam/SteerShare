@@ -21,6 +21,10 @@ export class SearchComponent implements OnInit {
   constructor(private rideService: RideService, private router: Router, public zone: NgZone) { }
 
   ngOnInit() {
+
+
+
+
     this.rideService.list().subscribe(locations => {
       this.locations = locations;
       this.currentDate = new Date().toISOString().split('T')[0];

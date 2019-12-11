@@ -11,6 +11,7 @@ import { first } from 'rxjs/operators';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
+  submitted = false;
 
 
   constructor(
@@ -28,7 +29,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      username: ['', Validators.required],
+      username: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       profileImage: ['', Validators.required]
     });
@@ -40,6 +41,9 @@ export class RegisterComponent implements OnInit {
 
 
   onSubmit(){
+    this.submitted = true;
+    if(this.registerForm.invalid) return;
+
     let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#profileImg');
     let profileImgName = inputEl.files.item(0).name;
     let formData = new FormData();

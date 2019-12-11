@@ -4,11 +4,11 @@ import { Booking } from './../models/booking.model';
 import { BookingService } from './../services/booking.service';
 import { RideService } from './../services/ride.service';
 import { Post } from 'src/app/models/post.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 
-
+declare var paypal;
 
 
 @Component({
@@ -17,9 +17,11 @@ import { Http, Response, RequestOptions, Headers } from '@angular/http';
   styleUrls: ['./confirmbooking.component.scss']
 })
 export class ConfirmbookingComponent implements OnInit {
+  @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
   post: Post;
   booking: Booking = new Booking();
 
+  paidFor = false;
 
 
   currentUser: User;
@@ -36,6 +38,9 @@ export class ConfirmbookingComponent implements OnInit {
 
   ngOnInit() {
 
+
+
+
     let id = this.route.snapshot.paramMap.get('id');
     console.log(id);
     this.RideService.view(id).subscribe(newPost => { this.post = newPost; });
@@ -47,12 +52,38 @@ export class ConfirmbookingComponent implements OnInit {
     // element.valueAsNumber =
     // Date.now() - new Date().getTimezoneOffset() * 60000;
 
+    paypal
+      .Buttons({
+        createOrder: (data, actions) => {
+          return actions.order.create({
+            purchase_units: [
+              {
+                description: "Your SteerShare Ride from " + this.post.from + " to " + this.post.to,
+                amount: {
+                  currency_code: 'USD',
+                  value: this.post.price
+                }
+              }
+            ]
+          });
+        },
+        onApprove: async (data, actions) => {
+          const order = await actions.order.capture();
+          this.paidFor = true;
+          this.confirmBooking(null);
+        },
+        onError: err => {
+          console.log(err);
+        }
+      })
+      .render(this.paypalElement.nativeElement);
+
 
   }
 
   confirmBooking(event: Event) {
     let user = {
-      email: (document.getElementById('email') as HTMLInputElement).value,
+      email: this.userService.currentUserValue.username,
       start: this.post.from,
       end: this.post.to,
       date: this.post.travel_date,
@@ -74,28 +105,43 @@ export class ConfirmbookingComponent implements OnInit {
 
       }
     )
-    this.booking.email = (document.getElementById('email') as HTMLInputElement).value,
-      this.booking.from = this.post.from
-    this.booking.to = this.post.to
-    this.booking.price = this.post.price
-    this.booking.travel_date = this.post.travel_date
-    this.booking.travel_time = this.post.travel_time
+
+
+
+    this.booking.email = this.userService.currentUserValue.username,
+    this.booking.from = this.post.from;
+    this.booking.to = this.post.to;
+    this.booking.price = this.post.price;
+    this.booking.travel_date = this.post.travel_date;
+    this.booking.travel_time = this.post.travel_time;
     console.log(this.booking.from);
-    this.booking.driversusername=this.post.username;
+    this.booking.driversusername = this.post.username;
 
     console.log(this.booking.driversusername);
 
+
+
+
+
+    // tslint:disable-next-line: no-conditional-assignment
+
+    console.log('email is valid')
     // tslint:disable-next-line: no-conditional-assignment
     if ((this.currentUser = this.userService.currentUserValue)) {
       console.log(this.currentUser.username);
       this.booking.username = this.currentUser.username;
       console.log(this.currentUser._id);
-      if(typeof this.currentUser._id === "string"){
+      if (typeof this.currentUser._id === "string") {
         console.log("id is a string");
       }
-      this.booking.userid=this.currentUser._id;
+      this.booking.userid = this.currentUser._id;
       this.BookingService.add(this.booking).subscribe();
+      //
     }
+
+
+    this.router.navigate(['/personal_home']);
+
 
 
 

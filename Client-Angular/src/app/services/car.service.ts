@@ -27,4 +27,10 @@ export class CarService {
     const car$ = this.http.get<Car>(`${environment.serverBaseURL}/cars/` + user_id);
     return car$;
   }
+
+  public update(car: Car, user_id: string): Observable<Car>{
+    car.user_id = user_id;
+    const car$ = this.http.put<Car>(`${environment.serverBaseURL}/cars/`, car);
+    return car$;
+  }
 }

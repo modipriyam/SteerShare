@@ -2,6 +2,7 @@ import { Injectable, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Router, ParamMap } from '@angular/router';
 
 import { environment } from '../../environments/environment';
 import { User } from '../models/user.model';
@@ -16,7 +17,7 @@ export class UserService {
   public currentUser: Observable<User>;
   @Output() getCurrentUser: EventEmitter<any> = new EventEmitter();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -47,8 +48,10 @@ export class UserService {
       }));
   }
 
+
   public logout(){
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+    window.location.href = 'http://localhost:4200';
   }
 }

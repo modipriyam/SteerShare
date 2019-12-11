@@ -12,7 +12,7 @@ module.exports = function(app){
         .delete(userController.delete); //Delete one user
 
     app.route('/posts/:id')
-        .get(postController.get);
+        .get(postController.get); //Fetch single post
 
     app.route('/posts')
         .get(postController.search) //Fetch one post
@@ -28,19 +28,26 @@ module.exports = function(app){
         .post(userController.upload, userController.uploadRes);
     
     app.route('/users/profileImg/:filename')
-        .get(userController.image);
+        .get(userController.image); 
 
     app.route('/cars')
-        .post(carController.add);
+        .post(carController.add) //Add cars
+        .put(carController.update); //Update cars
     
     app.route('/cars/:id')
-        .get(carController.get);
+        .get(carController.get); //Get particular car
 
     app.route('/rides')
-        .post(rideController.add);
-    
+        .post(rideController.add); //Add ride
+
+   
+
     app.route('/rides/:id')
-        .get(rideController.get);
+        .get(rideController.get) //Fetch one booking
+        .delete(rideController.delete); //Delete one booking
+
+    app.route('/rides/user/:username')
+        .get(rideController.getUserRides);
 
   
     

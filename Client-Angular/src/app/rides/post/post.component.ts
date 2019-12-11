@@ -63,7 +63,13 @@ export class PostComponent implements OnInit {
     const element = document.getElementById('date') as HTMLInputElement;
     element.valueAsNumber =
       Date.now() - new Date().getTimezoneOffset() * 60000;
+
+
+
+
+
   }
+
 
 
   addRide(event: Event) {
@@ -75,9 +81,30 @@ export class PostComponent implements OnInit {
     this.post.to=to;
     this.post.username = this.currentUser.username;
     console.log(this.post);
-    this.RideService.add(this.post).subscribe();
-    window.location.reload();
-  }
+
+
+    function validatePrice(price) {
+      // tslint:disable-next-line: max-line-length
+      var re = /^\d*[1-9]+\d*$/;
+      return re.test(String(price).toLowerCase());
+    }
+
+    if(validatePrice(this.post.price)){
+      this.RideService.add(this.post).subscribe();
+      window.alert('Ride has been posted');
+    //window.location.reload();
+    }
+    else{
+      window.alert('invalid price')
+    }
+
+
+    }
+
+
+
+
+
 
 
 
