@@ -13,6 +13,7 @@ import { Booking } from './../models/booking.model';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
+ chats : any;
  booking : Booking;
  room:String;
  messageText:String;
@@ -33,19 +34,16 @@ export class ChatComponent implements OnInit {
 
     console.log(this.userservice.currentUserValue.username);
 
-
-
-
   }
-
-
-
-
 
 
 
  join(){
     this._chatService.joinRoom({user:this.userservice.currentUserValue.username, room:this.room});
+    this._chatService.getChatbyRoom(this.room)
+       .subscribe(chat => this.chats.push(chat));
+
+
 
 }
 
