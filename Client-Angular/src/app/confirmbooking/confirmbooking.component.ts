@@ -80,7 +80,7 @@ export class ConfirmbookingComponent implements OnInit {
 
   confirmBooking(event: Event) {
     let user = {
-      email: (document.getElementById('email') as HTMLInputElement).value,
+      email: this.userService.currentUserValue.username,
       start: this.post.from,
       end: this.post.to,
       date: this.post.travel_date,
@@ -105,7 +105,7 @@ export class ConfirmbookingComponent implements OnInit {
 
 
 
-    this.booking.email = (document.getElementById('email') as HTMLInputElement).value,
+    this.booking.email = this.userService.currentUserValue.username,
       this.booking.from = this.post.from
     this.booking.to = this.post.to
     this.booking.price = this.post.price
@@ -125,7 +125,6 @@ export class ConfirmbookingComponent implements OnInit {
 
     // tslint:disable-next-line: no-conditional-assignment
 
-    if (validateEmail(this.booking.email)) {
       console.log('email is valid')
       if ((this.currentUser = this.userService.currentUserValue)) {
         console.log(this.currentUser.username);
@@ -137,11 +136,6 @@ export class ConfirmbookingComponent implements OnInit {
         this.booking.userid = this.currentUser._id;
         this.BookingService.add(this.booking).subscribe();
       }
-    }
-    else {
-      console.log('email is invalid');
-      window.alert('Enter valid email');
-    }
 
 
 
