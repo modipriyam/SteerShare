@@ -5,7 +5,8 @@ const Car = mongoose.model('Car');
 
 module.exports = {
     add,
-    get
+    get,
+    update
 }
 
 async function get(id){
@@ -21,6 +22,11 @@ async function add(car){
     const newCar = new Car(car);
     const promise = newCar.save();
     
+    return promise;
+}
+
+async function update(car){
+    const promise = Car.findOneAndUpdate({user_id: car.user_id}, car).exec();
     return promise;
 }
 
