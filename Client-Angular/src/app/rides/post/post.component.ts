@@ -71,7 +71,7 @@ export class PostComponent implements OnInit {
   }
 
 
-
+//Adds ride to databse
   addRide(event: Event) {
     console.log('Add clicked');
     console.log(this.post);
@@ -82,7 +82,7 @@ export class PostComponent implements OnInit {
     this.post.username = this.currentUser.username;
     console.log(this.post);
 
-
+    //Function for validating price (Field should be number)
     function validatePrice(price) {
       // tslint:disable-next-line: max-line-length
       var re = /^\d*[1-9]+\d*$/;

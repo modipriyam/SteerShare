@@ -25,6 +25,7 @@ export class NavBarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    //Check for current loggedin user 
     if(this.userService.currentUserValue){
       console.log(this.userService.currentUserValue);
       this.loggedin = true;
@@ -36,11 +37,13 @@ export class NavBarComponent implements OnInit {
     })
   }
 
+  //Log the user out
   logout(){
     this.loggedin = false;
     this.userService.logout();
   }
 
+  //Routing settings for post button
   ifLoggedIn(event:Event){
     if(this.userService.currentUserValue){
       this.router.navigate(['/post']);
@@ -49,7 +52,7 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(['/login']);
   }}
 
-
+  /**Checks if user is logged in or not(for chat) */
   ifLoggedInchat(event:Event){
   if(this.userService.currentUserValue){
     this.router.navigate(['/chat']);

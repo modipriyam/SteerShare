@@ -3,7 +3,7 @@
 //Import specific operations to database
 const carService = require('../services/carServices');
 
-//Create and return a new post in JSON based on the HTTP request
+//Add a car to a user
 exports.add = function(req, res){
     const newCar = Object.assign({}, req.body);
     const resolve = (car) => {
@@ -16,6 +16,7 @@ exports.add = function(req, res){
         .catch(renderErrorResponse(res));
 };
 
+//Get the car information
 exports.get = function(req, res){
     const resolve = (car) => {
         res.status(200);
@@ -28,6 +29,7 @@ exports.get = function(req, res){
 
 };
 
+//Update car information
 exports.update = function(req, res){
     const newCar = Object.assign({}, req.body);
     const resolve = (car) => {
