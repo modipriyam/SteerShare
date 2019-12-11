@@ -21,10 +21,6 @@ export class SearchComponent implements OnInit {
   constructor(private rideService: RideService, private router: Router, public zone: NgZone) { }
 
   ngOnInit() {
-
-
-
-
     this.rideService.list().subscribe(locations => {
       this.locations = locations;
       this.currentDate = new Date().toISOString().split('T')[0];
@@ -35,7 +31,7 @@ export class SearchComponent implements OnInit {
         Date.now() - new Date().getTimezoneOffset() * 60000;
     });
   }
-
+//Google api functionalities
   getAddress(place: object) {
     this.address = place['formatted_address'];
     this.phone = this.getPhone(place);
@@ -121,7 +117,7 @@ export class SearchComponent implements OnInit {
     return phone;
   }
 
-
+//validate search inputs and send as a query parameter
   validate(event: Event) {
     //let from = (document.getElementById('from') as HTMLInputElement).value;
     //let to = (document.getElementById('to') as HTMLInputElement).value;

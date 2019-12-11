@@ -52,7 +52,7 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(['/login']);
   }}
 
-
+  /**Checks if user is logged in or not(for chat) */
   ifLoggedInchat(event:Event){
   if(this.userService.currentUserValue){
     this.router.navigate(['/chat']);
