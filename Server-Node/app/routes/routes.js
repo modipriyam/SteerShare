@@ -5,6 +5,7 @@ module.exports = function(app){
     const postController = require('../controllers/postController');
     const carController = require('../controllers/carController');
     const rideController = require('../controllers/rideController');
+    const chatController = require('../controllers/chatController')
 
     app.route('/user/:id')
         .get(userController.get) //Fetch one user
@@ -48,6 +49,15 @@ module.exports = function(app){
 
     app.route('/rides/user/:username')
         .get(rideController.getUserRides);
+
+    app.route('/chat')
+    .post(chatController.post);
+
+    app.route('/chat/:name')
+        .get(chatController.get);
+
+    app.route('/chat/:room')
+        .get(chatController.getroom);
 
   
     

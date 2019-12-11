@@ -8,6 +8,7 @@ module.exports = function(app){
     let postModel = require('./models/post');
     let carModel = require('./models/car');
     let rideModel= require('./models/ride')
+    let chatmodel = require('./models/chat')
     
     //Initialize routes
     let routes = require("./routes/routes");
