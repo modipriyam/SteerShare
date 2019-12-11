@@ -1,7 +1,9 @@
+/**Car Model */
+
 export class Car {
-    _id: string; 
+    _id: string;
     user_id: string;
-    brand: string; 
+    brand: string;
     model: string;
     color: string;
     plate: string;

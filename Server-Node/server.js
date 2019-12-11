@@ -115,6 +115,7 @@ app.post("/sendmail",(req,res)=>{
 
 });
 
+//nodemailer function
 async function sendMail(user, callback){
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -127,6 +128,7 @@ async function sendMail(user, callback){
 
     });
 
+    //Mail specifics
     let mailOptions = {
         from: 'virajrajopadhye@gmail.com',
         to: user.email,

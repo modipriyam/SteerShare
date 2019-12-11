@@ -24,6 +24,7 @@ exports.get = function(username){
     return promise;
 }
 
+/**Function of searching user specific rides */
 exports.searchUserRides = function(username){
     const promise = Ride.find({
         username: {$eq: username}
@@ -32,6 +33,7 @@ exports.searchUserRides = function(username){
     return promise;
 }
 
+/**Function of Deleting ride */
 exports.delete = function (id) {
     const promise = Ride.remove({_id: id});
     return promise;
