@@ -83,12 +83,7 @@ public userLeftRoom(){
   return observable;
 }
 
-  //  public getMessages = () => {
-  //   return Observable.create((observer) => {
-  //       this.socket.on('new-message', (message) => {
-  //           observer.next(message);
-  //       });
-  //   });
+
 }
 
 
