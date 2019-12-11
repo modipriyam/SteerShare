@@ -1,7 +1,10 @@
+import { BookingService } from './../services/booking.service';
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
+import { Booking } from './../models/booking.model';
+
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,14 +15,18 @@ export class NavBarComponent implements OnInit {
 
   currentUser: User;
   loggedin: boolean;
+  booking: Booking;
 
   constructor(
     private router: Router,
-    public userService: UserService
+    private userService: UserService,
+    private bookingService: BookingService
+
   ) {}
 
   ngOnInit() {
     if(this.userService.currentUserValue){
+      console.log(this.userService.currentUserValue);
       this.loggedin = true;
       this.currentUser = this.userService.currentUserValue;
     }
@@ -47,7 +54,7 @@ export class NavBarComponent implements OnInit {
   if(this.userService.currentUserValue){
     this.router.navigate(['/chat']);
   } else{
-    this.router.navigate(['/chat']);
+    window.alert('Please check if a booking is confirmed to chat with your SteerMate')
   }}
 
 

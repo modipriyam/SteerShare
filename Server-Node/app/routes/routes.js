@@ -38,6 +38,8 @@ module.exports = function(app){
 
     app.route('/rides')
         .post(rideController.add);
+
+      
     
     app.route('/rides/:id')
         .get(rideController.get);
