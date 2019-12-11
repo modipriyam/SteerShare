@@ -32,5 +32,10 @@ exports.searchUserRides = function(username){
     return promise;
 }
 
+exports.delete = function (id) {
+    const promise = Ride.remove({_id: id});
+    return promise;
+};
+
 
 
