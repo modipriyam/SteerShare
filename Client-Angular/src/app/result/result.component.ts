@@ -22,11 +22,12 @@ export class ResultComponent implements OnInit {
   currentUser: User;
 
 
-  constructor(private rideService: RideService,private UserService: UserService, private route: ActivatedRoute, private router: Router,) { }
+  // tslint:disable-next-line: max-line-length
+  constructor(private rideService: RideService, private UserService: UserService, private route: ActivatedRoute, private router: Router, ) { }
 
   ngOnInit() {
-
-    if((this.currentUser = this.UserService.currentUserValue)){
+/**Redirects to login page if user is not logged in */
+    if ((this.currentUser = this.UserService.currentUserValue)) {
       this.route.queryParams.subscribe(params => {
         /**Receiving parameters from query*/
         let from = params['from'];
@@ -37,20 +38,17 @@ export class ResultComponent implements OnInit {
         /**Assigning it to Search Function */
 
         this.rideService.searchByLocationAndTime(from, to, date, time).subscribe(posts => {
-           console.log(posts);
-           this.posts = posts;
+          console.log(posts);
+          this.posts = posts;
         });
-
-
-
-        })
+      })
 
     }
-    else{
-      this.router.navigate(['/login'], {queryParams: {returnUrl: '/search'}});
+    else {
+      this.router.navigate(['/login'], { queryParams: { returnUrl: '/search' } });
     }
 
 
 
-}
+  }
 }

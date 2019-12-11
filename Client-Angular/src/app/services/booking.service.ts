@@ -12,12 +12,12 @@ export class BookingService {
 
   constructor(private http: HttpClient) { }
 
-
+//Add Booking to database
   public add(booking: Booking): Observable<Booking>{
     const bookings$ = this.http.post<Booking>('http://localhost:3000/rides', booking);
     return bookings$;
   }
-
+//Fetch Booking based on parameter ID
   public view(id: string): Observable<Booking>{
     const rides$ = this.http.get<Booking>('http://localhost:3000/rides/'+id);
     return rides$;
@@ -31,7 +31,7 @@ export class BookingService {
   public doNothing(){
 
   }
-
+//Deletes booking from Database
   public delete(id: string): Observable<Booking> {
     const rides$ = this.http.delete<Booking>('http://localhost:3000/rides/'+id);
     return rides$;

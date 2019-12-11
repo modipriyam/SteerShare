@@ -30,6 +30,7 @@ export class RideService {
     return posts$;
   }
 
+  //Searches rides based on Location and Time
   public searchByLocationAndTime(from: string, to: string, travel_date: string, travel_time: string): Observable<Array<Post>> {
     const params = new HttpParams()
       .set('from', from)
@@ -43,12 +44,12 @@ export class RideService {
     return posts$;
 
   }
-
+//Send email function
   public sendEmail(url, data){
     return this.http.post(url,data);
   }
 
-
+//Add Post to database
   public add(post: Post): Observable<Post>{
     const posts$ = this.http.post<Post>('http://localhost:3000/posts', post);
     return posts$;
@@ -64,7 +65,7 @@ export class RideService {
     const posts$ = this.http.get<Array<Post>>("http://localhost:3000/posts", {params});
     return posts$;
   }
-
+//Searches rides just by location(Unused)
   public searchByLocation(from: string, to: string, travel_date: string): Observable<Array<Post>> {
     const params = new HttpParams()
       .set('from', from)

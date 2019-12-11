@@ -5,7 +5,6 @@ const userService = require('../services/userServices');
 const multer = require('multer');
 const fs = require('fs');
 
-//Create and return a new user in JSON based on the HTTP request
 exports.post = function(req, res){
     const newUser = Object.assign({}, req.body);
     const resolve = (user) => {
@@ -18,19 +17,21 @@ exports.post = function(req, res){
         .catch(renderErrorResponse(res));
 };
 
+//Authenticate an user for with password
 exports.authenticate = function(req, res, next){
     userService.authenticate(req.body)
         .then(user => user ? res.json(user) : res.status(400).json({ message: 'Username or password is incorrect' }))
         .catch(err => next(err));
 }
 
-
+//Register a new user
 exports.register = function(req, res, next){
     userService.register(req.body)
         .then(()=> res.json({}))
         .catch(err => next(err));
 }
 
+//Parse the img from the request
 const storage = multer.diskStorage({
     destination: function(req, file, callback){
         callback(null, './profile_imgs');
@@ -40,12 +41,14 @@ const storage = multer.diskStorage({
     }
 })
 
+//Specify the field to get the img
 exports.upload = multer({storage: storage}).single('profile_img');
 
 exports.uploadRes = function(req, res){
     res.json({});
 }
 
+// Fetch profile img for the user
 exports.image = function(req, res){
     fs.readFile("profile_imgs/"+req.params.filename, function(err, data){
         if(err) {

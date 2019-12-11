@@ -3,11 +3,13 @@
     <div class="form-group">
         <label for="brand">Brand</label>
         <input type="text" formControlName="brand" class="form-control" [(ngModel)]="userCar.brand">
+        <div class="validation-feedback" *ngIf="submitted && this.formControls.brand.invalid">Brand is required</div>
     </div>
 
     <div class="form-group">
         <label for="model">Model</label>
         <input type="text" formControlName="model" class="form-control" [(ngModel)]="userCar.model">
+        <div class="validation-feedback" *ngIf="submitted && this.formControls.model.invalid">Model is required</div>
     </div>
 
     <div class="form-group">
@@ -16,14 +18,16 @@
             <option value="" disabled>Choose the color of your car</option>
             <option *ngFor="let color of colors">{{color}}</option>
         </select>
+        <div class="validation-feedback" *ngIf="submitted && this.formControls.color.invalid">Color is required</div>
     </div>
 
     <div class="form-group">
         <label for="plate">Plate Number</label>
         <input type="text" minlength="5" maxlength="7" formControlName="plate" class="form-control" [(ngModel)]="userCar.plate">
+        <div class="validation-feedback" *ngIf="submitted && this.formControls.plate.invalid">Plate Number should consist of uppercase and digits</div>
     </div>
 
     <div class="form-group">
-        <button [disabled]="carForm.invalid" class="btn btn-primary">Update Your Car</button>
+        <button  class="btn btn-primary">Update Your Car</button>
     </div>
 </form>

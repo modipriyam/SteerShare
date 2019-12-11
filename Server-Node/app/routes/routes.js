@@ -5,6 +5,7 @@ module.exports = function(app){
     const postController = require('../controllers/postController');
     const carController = require('../controllers/carController');
     const rideController = require('../controllers/rideController');
+    const chatController = require('../controllers/chatController')
 
     app.route('/user/:id')
         .get(userController.get) //Fetch one user
@@ -16,19 +17,19 @@ module.exports = function(app){
 
     app.route('/posts')
         .get(postController.search) //Fetch one post
-        .post(postController.post);
+        .post(postController.post); 
 
     app.route('/users/authenticate')
-        .post(userController.authenticate);
+        .post(userController.authenticate); // Log in an User
     
     app.route('/users/register')
-        .post(userController.register);
+        .post(userController.register); // Register a user
     
     app.route('/users/uploadProfileImage')
-        .post(userController.upload, userController.uploadRes);
+        .post(userController.upload, userController.uploadRes); // User upload profile img
     
     app.route('/users/profileImg/:filename')
-        .get(userController.image); 
+        .get(userController.image); // Fetch user profile img
 
     app.route('/cars')
         .post(carController.add) //Add cars
@@ -46,11 +47,11 @@ module.exports = function(app){
         .get(rideController.get) //Fetch one booking
         .delete(rideController.delete); //Delete one booking
 
-    app.route('/rides/user/:username')
-        .get(rideController.getUserRides);
+    app.route('/rides/user/:username') 
+        .get(rideController.getUserRides); //Fetch user booking
 
     app.route('/chat')
-        .post(chatController.post);
+    .post(chatController.post);
 
     app.route('/chat/:name')
         .get(chatController.get);
