@@ -19,7 +19,6 @@ import { ChatComponent } from './chat/chat.component';
 import { ChatService   } from './services/chat.service';
 import { AutocompleteComponent } from './rides/search/google-places.component';
 import { CarComponent } from './users/car/car.component';
-import { UpdateCarComponent } from './users/update-car/update-car.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +34,7 @@ import { UpdateCarComponent } from './users/update-car/update-car.component';
     PersonalHomeComponent,
     ChatComponent,
     AutocompleteComponent,
-    CarComponent,
-    UpdateCarComponent
+    CarComponent
   ],
   imports: [
     BrowserModule,

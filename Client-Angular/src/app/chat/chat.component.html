@@ -46,10 +46,25 @@
         </div>
       </div>
     </div>
- <div class="row">
-   <div class="well" style="height:200px; padding:15px;">
-     <div *ngFor="let item of messageArray">
-       <span><strong>{{item.user}} : </strong> {{item.message}}</span>
-     </div>
-   </div>
- </div>
+ <div class="container">
+ <div class="section-wrapper mg-t-20">
+   <label class="section-title">Conversation</label>
+   <div class="row">
+     <div class="col-md-12">
+       <div class="list-group">
+         <div class="list-group-item pd-y-20" *ngFor="let item of messageArray">
+           <div class="media">
+             <div class="d-flex mg-r-10 wd-50">
+               <i class="fa fa-file-text-o tx-primary tx-40 tx"></i>
+             </div><!-- d-flex -->
+             <div class="media-body">
+               <h6 class="tx-inverse">{{item.user}}</h6>
+               <p class="mg-b-0">{{item.message}}</p>
+             </div><!-- media-body -->
+           </div><!-- media -->
+         </div><!-- list-group-item -->
+       </div><!-- list-group -->
+     </div><!-- col-md-6 -->
+   </div><!-- row -->
+ </div><!-- section-wrapper -->
+</div>

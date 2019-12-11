@@ -8,8 +8,12 @@
       <h3 class="signin-title-secondary">Sign in to continue.</h3>
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
+<<<<<<< HEAD
+        <input type="text" class="form-control" placeholder="First Name" formControlName="firstName" required pattern="banana|cherry">
+=======
         <input type="text" class="form-control" placeholder="First Name" formControlName="firstName">
         <div class="validation-feedback" *ngIf="submitted && this.formControls.firstName.invalid">First name is required</div>
+>>>>>>> 2ad0e5a760716aac6a07e1b3abb520abffb6b147
       </div><!-- form-group -->
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName">
