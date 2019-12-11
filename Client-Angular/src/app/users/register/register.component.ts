@@ -20,12 +20,14 @@ export class RegisterComponent implements OnInit {
       private userService: UserService,
       private el: ElementRef
   ) { 
+    //If logged in, redirect to home page
     if(this.userService.currentUserValue){
       this.router.navigate(['/']);
     }
   }
 
   ngOnInit() {
+    // Build the form and validations
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -40,6 +42,7 @@ export class RegisterComponent implements OnInit {
   }
 
 
+  //Register form submit functionality
   onSubmit(){
     this.submitted = true;
     if(this.registerForm.invalid) return;

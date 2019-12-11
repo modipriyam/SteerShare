@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    //login form validation
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -36,10 +37,8 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
+  //login submit functionality
   onSubmit(){
-    console.log(this.formControls.username.value);
-    console.log(this.formControls.password.value);
-    console.log(this.loginForm.valid);
     this.userService.login(this.formControls.username.value, this.formControls.password.value)
       .pipe(first())
       .subscribe(
