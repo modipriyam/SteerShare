@@ -1,7 +1,12 @@
+
+import { BookingService } from './../services/booking.service';
+import { UserService } from './../services/user.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../services/chat.service';
-import { UserService } from '../services/user.service';
+import { Booking } from './../models/booking.model';
+
+
 
 @Component({
   selector: 'app-chat',
@@ -9,11 +14,11 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
- user:String;
+ booking : Booking;
  room:String;
  messageText:String;
  messageArray:Array<{user:String,message:String}> = [];
- constructor(private _chatService:ChatService, private userService: UserService){
+ constructor(private _chatService:ChatService, private userservice:UserService){
      this._chatService.newUserJoined()
      .subscribe(data=> this.messageArray.push(data));
 
@@ -26,38 +31,41 @@ export class ChatComponent implements OnInit {
  }
 
   ngOnInit() {
-    // this.chatservice
-    //   .getMessages()
-    //   .subscribe((message: string) => {
-    //     this.messages.push(message);
-    //   });
+
+    console.log(this.userservice.currentUserValue.username);
+
+
+
+
   }
 
 
-  ifloggedin
 
 
 
-  join(){
-    this._chatService.joinRoom({user:this.user, room:this.room});
+
+
+ join(){
+    this._chatService.joinRoom({user:this.userservice.currentUserValue.username, room:this.room});
+
 }
 
 leave(){
-    this._chatService.leaveRoom({user:this.user, room:this.room});
+    this._chatService.leaveRoom({user:this.userservice.currentUserValue.username, room:this.room});
 }
 
 sendMessage()
 {
-    this._chatService.sendMessage({user:this.user, room:this.room, message:this.messageText});
+    this._chatService.sendMessage({user:this.userservice.currentUserValue.username, room:this.room, message:this.messageText});
 }
 
 
 
-  
 
-    
-  
-  
+
+
+
+
 
 
 
