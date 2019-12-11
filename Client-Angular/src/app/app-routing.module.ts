@@ -12,7 +12,6 @@ import { SearchComponent } from "./rides/search/search.component";
 import { HomeComponent } from './home/home.component';
 import { ChatComponent } from './chat/chat.component';
 import { CarComponent } from './users/car/car.component';
-import { UpdateCarComponent } from './users/update-car/update-car.component';
 
 
 
@@ -57,10 +56,6 @@ const routes: Routes = [
   {
     path: 'car',
     component: CarComponent
-  },
-  {
-    path: 'updateCar',
-    component: UpdateCarComponent
   }
 
 

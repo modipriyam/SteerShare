@@ -1,3 +1,5 @@
+/**Booking Model */
+
 export class Booking {
   _id: string;
   username: string;

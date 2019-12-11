@@ -9,23 +9,28 @@
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="First Name" formControlName="firstName">
+        <div class="validation-feedback" *ngIf="submitted && this.formControls.firstName.invalid">First name is required</div>
       </div><!-- form-group -->
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName">
+        <div class="validation-feedback" *ngIf="submitted && this.formControls.lastName.invalid">Last name is required</div>
       </div><!-- form-group -->
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Enter your email" formControlName="username">
+        <div class="validation-feedback" *ngIf="submitted && this.formControls.username.invalid">Email is required</div>
       </div><!-- form-group -->
       <div class="form-group">
         <input type="password" class="form-control" placeholder="Enter your password" formControlName="password">
+        <div class="validation-feedback" *ngIf="submitted && this.formControls.password.invalid"> Password has to be at least digits or passwords</div>
       </div><!-- form-group -->
       <div class="form-group">
       <div class="custom-file">
         <input type="file" class="custom-file-input" id="profileImg" formControlName="profileImage">
         <label class="custom-file-label custom-file-label-primary" for="customFile">Choose file</label>
+        <div class="validation-feedback" *ngIf="submitted && this.formControls.profileImage.invalid">Profile Image is required</div>
       </div><!-- custom-file -->
       </div>
-      <button class="btn btn-primary btn-block btn-signin" [disabled]="registerForm.invalid">Register</button>
+      <button class="btn btn-primary btn-block btn-signin">Register</button>
       </form>
       <p class="mg-t-20 mg-b-0">Already have an account? <a href="login">Sign In</a></p>
     </div>

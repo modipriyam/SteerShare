@@ -1,29 +1,141 @@
-<h2>Hello, {{currentUser.firstName}}</h2>
+  <div class="container">
+    <div class="row row-sm mg-t-20">
+      <div class="col-lg-8">
+        <div class="card card-profile">
+          <div class="card-body">
+            <div class="media">
+              <img src='http://localhost:3000/users/profileImg/{{currentUser.profileImgName}}'>
+              <div class="media-body">
+                <h3 class="card-profile-name">Hello, {{currentUser.firstName}} {{currentUser.lastName}} </h3>
+                <p class="card-profile-position">Executive Director at <a>SteerShare Inc.</a></p>
+                <p class="mg-b-0">A consummate human capital management professional with international training and talent management implementations experience across the entire universe.</p>
+              </div><!-- media-body -->
+            </div><!-- media -->
+          </div><!-- card-body -->
+        </div><!-- card -->
+        <div class="card-footer">
+        <ul class="nav nav-activity-profile mg-t-20">
+          <li class="nav-item"><a class="nav-link"><i class="ion-md-share"></i>&nbsp; Refer a Friend</a></li>
+          <li class="nav-item"><a class="nav-link"><i class="ion-md-star-half"></i>&nbsp;Rate Driver</a></li>
+          <li class="nav-item"><a class="nav-link"><i class="ion-md-albums"></i>&nbsp; Report Issue</a></li>
+        </ul><!-- nav -->
+        </div>
 
-<h2>Your upcoming rides</h2>
-    <div *ngFor="let ride of userRides">
-       You are riding From: {{ride.from}} <br>
-        You are riding To: {{ride.to}} <br>
-       You will be riding on: {{ride.travel_date}} <br>
-       You will be riding at:  {{ride.travel_time}} <br>
-       Driver Contact Details: {{ride.driversusername}} <br>
-        <button type="submit" (click)="deleteRides(ride)" class="btn btn-success">Cancel Ride</button>
-    </div>
+        <div class="card card-experience mg-t-20">
+          <div class="card-body">
+            <div class="slim-card-title">Registered Cars</div>
+            <div class="media">
+              <div class="experience-logo">
+                <i class="ion-md-car"></i>
+              </div><!-- experience-logo -->
+              <div class="media-body" *ngIf="currentCar">
+                <h6 class="position-name">{{currentCar.model}} - {{currentCar.plate}}</h6>
+                <p class="position-company">{{currentCar.brand}}</p>
+                <p class="position-year">{{currentCar.color}}</p>
+              </div><!-- media-body -->
+            </div><!-- media -->
+          </div><!-- card-body -->
+          <div class="card-footer" *ngIf="currentCar">
+            <a >Show More Registered Cars <span class="d-none d-sm-inline"></span><i class="fa fa-angle-down"></i></a>
+            <a  *ngIf="currentCar" routerLink="/car">Update Car Details</a>
+          </div><!-- card-footer -->
+        </div><!-- card -->
 
-<h2>Your finished transactions:</h2>
+        <div class="card card-experience mg-t-20">
+          <div class="card-body">
+            <div class="slim-card-title">Manage Rides</div>
+            <div class="media"  *ngFor="let ride of userRides">
+              <div class="experience-logo">
+                <i class="ion-md-switch"></i>
+              </div><!-- experience-logo -->
+              <div class="media-body">
+                <h6><a>{{ride.from}} - {{ride.to}}</a></h6>
+                <p>Driver Details : {{ride.driversusername}}</p>
+                <p>Ride Start Date : {{ride.travel_date}}</p>
+                <p>Ride Start Time : {{ride.travel_time}}</p>
+              </div><!-- media-body -->
+              <button type="submit" (click)="deleteRides(ride)" class="btn btn-primary bd-0">Cancel Your Ride</button>
+            </div><!-- media -->
+          </div><!-- card-body -->
+        </div><!-- card -->
+
+        <div class="card card-experience mg-t-50">
+        </div>
+      </div><!-- col-8 -->
+
+      <div class="col-lg-4 mg-t-20 mg-lg-t-0">
+        <div class="card card-connection">
+          <div class="row row-xs">
+            <div class="col-4 tx-primary">12</div>
+            <div class="col-8">Total Ride Posted
+            </div>
+          </div><!-- row -->
+          <hr>
+          <div class="row row-xs">
+            <div class="col-4 tx-purple">45</div>
+            <div class="col-8">
+              Total Ride Booked
+            </div>
+          </div><!-- row -->
+        </div><!-- card -->
+
+        <div class="card card-connection mg-t-30">
+          <div class="row row-xs">
+            <div class="col-4 tx-primary">$472</div>
+            <div class="col-8">Earning
+            </div>
+          </div><!-- row -->
+          <hr>
+          <div class="row row-xs">
+            <div class="col-4 tx-purple">$157</div>
+            <div class="col-8">
+              Spent
+            </div>
+          </div><!-- row -->
+        </div><!-- card -->
 
 
-<h2>Your car</h2>
-<div *ngIf="currentCar">
-    Brand: {{currentCar.brand}}
-    Model: {{currentCar.model}}
-    Color: {{currentCar.color}}
-    Plate Number: {{currentCar.plate}}
-    <a routerLink="/updateCar">Update Your Car</a>
-</div>
-<div *ngIf="!currentCar">
-    <a routerLink="/car">Register Your Car</a>
-</div>
+        <div class="card pd-25 mg-t-30">
+          <div class="slim-card-title">Past Transaction</div>
 
+          <div class="media-list mg-t-25">
+            <div class="media">
+            </div><!-- media -->
+            <div class="media mg-t-25">
+              <div><i class="ion-md-rocket tx-24 lh-0"></i></div>
+              <div class="media-body mg-l-15 mg-t-4">
+                <h6 class="tx-14 tx-gray-700">Boston - New York</h6>
+                <span class="d-block">Seats : 2</span>
+                <span class="d-block">Cost : $210</span>
+              </div><!-- media-body -->
+            </div><!-- media -->
+            <div class="media mg-t-25">
+              <div><i class="ion-md-rocket tx-24 lh-0"></i></div>
+              <div class="media-body mg-l-15 mg-t-4">
+                <h6 class="tx-14 tx-gray-700">Chicago - North Carolina</h6>
+                <span class="d-block">Seats : 4</span>
+                <span class="d-block">Cost : $480</span>
+              </div><!-- media-body -->
+            </div><!-- media -->
+            <div class="media mg-t-25">
+              <div><i class="ion-md-rocket tx-24 lh-0"></i></div>
+              <div class="media-body mg-l-15 mg-t-4">
+                <h6 class="tx-14 tx-gray-700">Florida - Miami</h6>
+                <span class="d-block">Seats : 3</span>
+                <span class="d-block">Cost : $350</span>
+              </div><!-- media-body -->
+            </div><!-- media -->
+            <div class="media mg-t-25">
+              <div><i class="ion-md-rocket tx-24 lh-0"></i></div>
+              <div class="media-body mg-l-15 mg-t-4">
+                <h6 class="tx-14 tx-gray-700">California - Seattle</h6>
+                <span class="d-block">Seats : 1</span>
+                <span class="d-block">Cost : $50</span>
+              </div><!-- media-body -->
+            </div><!-- media -->
+          </div><!-- media-list -->
+        </div><!-- card -->
+      </div><!-- col-4 -->
+    </div><!-- row -->
 
-<img src='http://localhost:3000/users/profileImg/{{currentUser.profileImgName}}' width="100" height="100">
+  </div><!-- container -->
