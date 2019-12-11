@@ -13,4 +13,8 @@
 .idea/workspace.xml
 dist/docs/
 /dist
-profile_imgs
+# exclude everything
+profile_imgs/*
+
+# exception to the rule
+!profile_imgs/placeholder.png 
