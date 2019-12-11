@@ -33,6 +33,7 @@ export class PersonalHomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    //Check for current user and fetch their car information
     if((this.currentUser = this.userService.currentUserValue)){
       this.carService.get(this.currentUser._id)
         .subscribe((car)=>{
@@ -49,19 +50,10 @@ export class PersonalHomeComponent implements OnInit {
 
   }
 
-  //  viewRides(event: Event){
-  //   if ((this.currentUser = this.userService.currentUserValue)) {
-  //     console.log(this.currentUser.username);
-
-  //     this.bookingService.view(id).subscribe(bookings => {
-  //         console.log(bookings);
-  //     });
-  //   }
-  // }
-
 deleteRides(ride: Booking){
   this.bookingService.delete(ride._id).subscribe();
   window.alert('ride deleted');
+  location.reload();
 }
 
 }
