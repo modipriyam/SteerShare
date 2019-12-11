@@ -31,7 +31,8 @@ module.exports = function(app){
         .get(userController.image);
 
     app.route('/cars')
-        .post(carController.add);
+        .post(carController.add)
+        .put(carController.update);
     
     app.route('/cars/:id')
         .get(carController.get);
