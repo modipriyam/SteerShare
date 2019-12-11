@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-//Create the data model
+//Create Ride data model
 let Ride = new Schema({
     username:{
         type: String,

@@ -38,6 +38,9 @@ export class ConfirmbookingComponent implements OnInit {
 
   ngOnInit() {
 
+
+
+
     let id = this.route.snapshot.paramMap.get('id');
     console.log(id);
     this.RideService.view(id).subscribe(newPost => { this.post = newPost; });

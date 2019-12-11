@@ -42,6 +42,8 @@ exports.list = function(req, res){
         .catch(renderErrorResponse(res));
 }
 
+/**Function Get user Rides */
+
 exports.getUserRides = function(req, res){
     const resolve = (rides) => {
         res.status(200);
@@ -66,7 +68,7 @@ let renderErrorResponse = (response) => {
     return errorCallback;
 };
 
-
+/**Deletes ride*/
 exports.delete = function (request, response) {
     const resolve = (todo) => {
         response.status(200);
