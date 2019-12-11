@@ -1,60 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-   
-</head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 col-sm-12">
-                <h1 class="text-center">
-                    Chat with your SteerMate
-                    <!-- <button id="clear" class="btn btn-danger">Clear</button> -->
-                </h1>
-
-                <div class="col-sm-5">
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" [(ngModel)]="user" class="form-control" id="username" placeholder="Enter username">
-                      
-                    </div>
-                </div>
-
-                <div class="col-sm-5">
-                    <label for="roomInput">Choose room</label>
-                    <select name="roomInput" id="roomInput" class="form-control" [(ngModel)]="room">
-                        <option value="User1">User1</option>
-                        <option value="User2">User2</option>
-                        <option value="User3">User3</option>
-                    </select>
-                </div>
-                <div class="col sm-2">
-                    <div style="margin-top:19px;" class="pull-right"> 
-                        <button type="button" class="btn btn-primary" (click)="join()">Join</button>
-                        <button type="button" class="btn btn-default" (click)="leave()">Leave</button>
-                    </div>
-                </div>
-                <br>
-                <br>
-
+ <div class = "container">
+      <div class="row row-sm mg-t-20">
+        <div class="col-lg-12">
+          <div class="section-wrapper">
+            <label class="section-title">CHAT STEERMATE</label>
+            <p class="mg-b-20 mg-sm-b-40">Innovation to Travel.</p>
+            <form>
+              <div class="form-layout form-layout-4">
                 <div class="row">
-                    <div class="well" style="height:200px; padding:15px;">
-                        <div *ngFor="let item of messageArray">
-                        <span><strong>{{item.user}} : </strong> {{item.message}}</span>
-                        </div>
-                    </div>
-                </div>
-
-
-                    <br>
-                    <textarea [(ngModel)]="messageText" (keyup)="$event.keyCode == 13 && sendMessage()" id="textarea" class="form-control" placeholder="Enter message..."></textarea>
-
-                    <button (click)="sendMessage()">Send</button>
-                </div>
-            </div>
+                  <label class="col-sm-4 form-control-label">User: <span class="tx-danger">*</span></label>
+                  <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                    <select name="roomInput" id="roomInput" class="form-control" [(ngModel)]="room">
+                      <option value="User1">User1</option>
+                      <option value="User2">User2</option>
+                      <option value="User3">User3</option>
+                    </select>
+                  </div>
+                </div><!-- row -->
+                <div class="form-layout-footer mg-t-30">
+                  <button type="submit" (click)="join()" class="btn btn-primary bd-0">Join</button>
+                  <button class="btn btn-secondary bd-0"  (click)="leave()">Cancel</button>
+                </div><!-- form-layout-footer -->
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
+    </div>
 
+    <div class = "container">
+      <div class="row row-sm mg-t-20">
+        <div class="col-lg-12">
+          <div class="section-wrapper">
+              <div class="form-layout form-layout-4">
+                <div class="row">
+                  <label class="col-sm-4 form-control-label">Message:  <span class="tx-danger">*</span></label>
+                    <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                      <textarea  [(ngModel)]="messageText" (keyup)="$event.keyCode == 13 && sendMessage()" id="textarea" rows="2" class="form-control" placeholder="Enter Your Message"></textarea>
+                    </div>
+                </div><!-- row -->
+                <div class="form-layout-footer mg-t-30">
+                  <button type="submit" (click)="sendMessage()" class="btn btn-primary bd-0">Send Message</button>
+                </div><!-- form-layout-footer -->
+              </div>
+           </div>
+        </div>
+      </div>
+    </div>
+ <div class="container">
+ <div class="section-wrapper mg-t-20">
+   <label class="section-title">Conversation</label>
+   <div class="row">
+     <div class="col-md-12">
+       <div class="list-group">
+         <div class="list-group-item pd-y-20" *ngFor="let item of messageArray">
+           <div class="media">
+             <div class="d-flex mg-r-10 wd-50">
+               <i class="fa fa-file-text-o tx-primary tx-40 tx"></i>
+             </div><!-- d-flex -->
+             <div class="media-body">
+               <h6 class="tx-inverse">{{item.user}}</h6>
+               <p class="mg-b-0">{{item.message}}</p>
+             </div><!-- media-body -->
+           </div><!-- media -->
+         </div><!-- list-group-item -->
+       </div><!-- list-group -->
+     </div><!-- col-md-6 -->
+   </div><!-- row -->
+ </div><!-- section-wrapper -->
+</div>
