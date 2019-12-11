@@ -11,6 +11,7 @@ import { first } from 'rxjs/operators';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
+  submitted = false;
 
 
   constructor(
@@ -40,6 +41,9 @@ export class RegisterComponent implements OnInit {
 
 
   onSubmit(){
+    this.submitted = true;
+    if(this.registerForm.invalid) return;
+
     let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#profileImg');
     let profileImgName = inputEl.files.item(0).name;
     let formData = new FormData();
