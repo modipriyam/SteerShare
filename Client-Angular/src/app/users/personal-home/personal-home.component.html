@@ -2,10 +2,11 @@
 
 <h2>Your upcoming rides</h2>
     <div *ngFor="let ride of userRides">
-        {{ride.from}}
-        {{ride.to}}
-        {{ride.travel_date}}
-        {{ride.travel_time}}
+       You are riding From: {{ride.from}} <br>
+        You are riding To: {{ride.to}} <br>
+       You will be riding on: {{ride.travel_date}} <br>
+       You will be riding at:  {{ride.travel_time}} <br>
+       You will be riding with: {{ride.driversusername}} <br>
         <button type="submit" (click)="deleteRides(ride)" class="btn btn-success">Cancel Ride</button>
     </div>
 
