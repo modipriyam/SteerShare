@@ -52,6 +52,8 @@ export class ConfirmbookingComponent implements OnInit {
     // element.valueAsNumber =
     // Date.now() - new Date().getTimezoneOffset() * 60000;
 
+
+    /**Paypal payment method function  */
     paypal
       .Buttons({
         createOrder: (data, actions) => {
@@ -139,7 +141,7 @@ export class ConfirmbookingComponent implements OnInit {
       //
     }
 
-
+    /**Navigation to personal home page after successful booking */
     this.router.navigate(['/personal_home']);
 
 
