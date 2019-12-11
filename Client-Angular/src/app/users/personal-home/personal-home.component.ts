@@ -53,6 +53,7 @@ export class PersonalHomeComponent implements OnInit {
 deleteRides(ride: Booking){
   this.bookingService.delete(ride._id).subscribe();
   window.alert('ride deleted');
+  location.reload();
 }
 
 }
