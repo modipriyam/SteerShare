@@ -16,7 +16,6 @@ A MEAN application which lets you find a travel mate to ride with very easily
 * Book a ride
 * Search from-to location using Google Map / Map API
 * Login/Register(with profile picture of specified dimensions)
-* Password recovery using email
 * Payment using credit/debit card/ paypal
 * Email confirmation of booking
 * Chat between Driver and Passenger
