@@ -18,6 +18,9 @@ module.exports = function(app){
     app.route('/posts')
         .get(postController.search) //Fetch one post
         .post(postController.post); 
+    
+    app.route('/posts/user/:username')
+        .get(postController.getUserPosts);
 
     app.route('/users/authenticate')
         .post(userController.authenticate); // Log in an User

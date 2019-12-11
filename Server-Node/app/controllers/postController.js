@@ -93,6 +93,17 @@ exports.delete = function(req, res){
         .catch(renderErrorResponse(res));
 };
 
+exports.getUserPosts = function(req, res){
+    const resolve = (posts) => {
+        res.status(200);
+        res.json(posts);
+    }
+
+    postService.searchUserPosts(req.params.username)
+        .then(resolve)
+        .catch(renderErrorResponse(res));
+}
+
 
 //Throw error if error object is present
 let renderErrorResponse = (response) => {
